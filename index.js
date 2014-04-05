@@ -71,6 +71,7 @@ function mockCouch () {
   server.get('/:db/:doc', function(req, res, next) {
     var db = self.databases[req.params.db];
     var doc = db[req.params.doc];
+    res.setHeader('ETag', '"' + doc._rev + '"');
     res.send(200, doc);
     next();
   });
@@ -89,6 +90,7 @@ function mockCouch () {
     if(!current) {
       doc._rev = '1-' + createMD5(JSON.stringify(doc));
       db[id] = doc;
+      res.setHeader('ETag', '"' + doc._rev + '"');
       res.send(201, {ok: true, id: id, rev: doc._rev});
     } else if (!!current && current._rev === doc._rev) {
       __.extend(current, doc);
@@ -99,6 +101,7 @@ function mockCouch () {
         return rev_num + '-' + createMD5(JSON.stringify(d));
       }(current));
 
+      res.setHeader('ETag', '"' + current._rev + '"');
       res.send(201, {ok: true, id: id, rev: current._rev});
     } else {
       res.send(409, {error:'conflict',reason:'Document update conflict.'});
