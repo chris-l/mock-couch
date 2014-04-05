@@ -1,0 +1,22 @@
+{
+  "name": "mock-couch",
+  "version": "0.0.1",
+  "description": "An http server pretending to be couchdb",
+  "main": "index.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "keywords": [
+    "couchdb",
+    "http",
+    "server",
+    "mock"
+  ],
+  "author": "Christopher Luna <dev@christopher-luna.com>",
+  "license": "MIT",
+  "readme": "# The Mock Couch\n\nAn http server pretending to be couchdb. It's designed mostly for unit testing couchdb apps.",
+  "dependencies": {
+    "restify": "^2.7.0",
+    "underscore": "^1.6.0"
+  }
+}
