@@ -125,10 +125,10 @@ function mockCouch () {
    */
   server.del('/:db/:doc', function(req, res, next) {
     var db = self.databases[req.params.db];
-    var rev = req.query.rev;
+    var rev = req.query.rev || ( req.headers['if-match'] && req.headers['if-match'].replace(/"/g, '') ) || false;
     var doc = db[req.params.doc] || false;
 
-    if(rev === undefined || !doc || rev !== doc._rev) {
+    if(!rev || !doc || rev !== doc._rev) {
       res.send(409, {error:'conflict',reason:'Document update conflict.'});
       return false;
     }
