@@ -1,5 +1,6 @@
 var __ = require('underscore')._,
     restify = require('restify'),
+    util = require('util'),
     crypto = require('crypto');
 
 
@@ -15,7 +16,14 @@ function mockCouch () {
 
   /** The var 'server' contains the restify server */
   var server = (function() {
-    var server = restify.createServer();
+    var server = restify.createServer({
+      formatters : {
+        'application/json' : function(req, res, body) {
+          res.setHeader('Server', 'CouchDB/1.0.1 (Erlang OTP/R13B)');
+          return util.inspect(body);
+        }
+      }
+    });
     server.use(restify.bodyParser({ mapParams: false }));
     server.pre(restify.pre.sanitizePath());
     server.use(restify.queryParser());
