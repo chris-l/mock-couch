@@ -1,7 +1,9 @@
 var __ = require('underscore')._,
     restify = require('restify'),
     util = require('util'),
-    crypto = require('crypto');
+    crypto = require('crypto'),
+    events = require("events");
+
 
 
 function createMD5(data) {
@@ -13,6 +15,7 @@ function createMD5(data) {
 }
 
 function mockCouch () {
+  events.EventEmitter.call(this);
 
   /** The var 'server' contains the restify server */
   var server = (function() {
@@ -81,6 +84,7 @@ function mockCouch () {
     var doc = db[req.params.doc];
     res.setHeader('ETag', '"' + doc._rev + '"');
     res.send(200, doc);
+    self.emit('GET', { id : req.params.doc, doc: doc });
     next();
   });
 
@@ -114,6 +118,7 @@ function mockCouch () {
     } else {
       res.send(409, {error:'conflict',reason:'Document update conflict.'});
     }
+    self.emit('POST', { id : id, doc: doc });
     next();
   };
   server.put('/:db/:doc', put_doc);
@@ -134,6 +139,7 @@ function mockCouch () {
     }
 
     delete db[req.params.doc];
+    self.emit('DELETE', { id : req.params.doc });
     res.send(200, {ok: true, id: req.params.doc, rev: ''});
   });
 
@@ -163,6 +169,7 @@ function mockCouch () {
     return server.close.apply(server, arguments);
   };
 }
+util.inherits(mockCouch, events.EventEmitter);
 
 module.exports = {
   createServer : function() {
