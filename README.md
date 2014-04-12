@@ -24,7 +24,7 @@ npm install --save-dev mock-couch
 * Several of the CouchDB REST methods. Right now it has:
  - GET one document
  - GET `_all_docs`
-  - including `include_docs=true`
+   * including `include_docs=true`
  - PUT one document
  - POST one document
  - DELETE one document
