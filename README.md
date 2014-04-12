@@ -1,5 +1,7 @@
 <h1><img src="https://raw.github.com/chris-l/mock-couch/master/title.png" alt="The Mock Couch" width="500px" height="97px" /></h1>
 
+[![Build Status](https://travis-ci.org/chris-l/mock-couch.png?branch=master)](https://travis-ci.org/chris-l/mock-couch)
+
 Mock a CouchDB server for your unit tests.
 
 Mock Couch will create an HTTP server that emulates the responses of a real CouchDB server.
