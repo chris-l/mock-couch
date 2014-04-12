@@ -15,6 +15,31 @@ Mock Couch emit events, so you can listen to them to see the result of your test
 npm install --save-dev mock-couch
 ```
 
+## Features
+
+* Implemented with [restify](https://github.com/mcavage/node-restify).
+* Uses simple JavaScript objects as documents.
+* It emit events, so the tests can listen to them.
+* The `mock_couch` object has a `databases` public property, to examine how the databases are in any moment.
+* Several of the CouchDB REST methods. Right now it has:
+ - GET one document
+ - GET `_all_docs`
+  - including `include_docs=true`
+ - PUT one document
+ - POST one document
+ - DELETE one document
+
+## Not yet implemented
+
+* Views (`_design` documents) with either map/reduce functions or just objects emulating their outputs.
+* Bulk insert/update documents
+* `startkey` and `endkey` for `_all_docs`
+* And a lot of other things!
+
+Keep in mind that Mock Couch is not attempting to fully implement CouchDB, but only the features necessary for unit testing CouchDB based apps.
+
+However, if there is a feature you need for your tests, feel free to add a feature request in the [issues section](https://github.com/chris-l/mock-couch/issues)!
+
 ## Usage
 
 Here is an example:
