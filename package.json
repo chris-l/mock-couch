@@ -15,7 +15,6 @@
   ],
   "author": "Christopher Luna <dev@christopher-luna.com>",
   "license": "MIT",
-  "readme": "# The Mock Couch\n\nAn http server pretending to be couchdb. It's designed mostly for unit testing couchdb apps.",
   "repository": {
     "type": "git",
     "url": "git@github.com:chris-l/mock-couch.git"
