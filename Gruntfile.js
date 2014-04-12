@@ -7,24 +7,24 @@ module.exports = function (grunt) {
     jshint  : {
       all     : [ 'package.json', 'Gruntfile.js', 'index.js', 'lib/**/*.js', 'test/**/*.js' ]
     },
-    'jasmine-node' : {
+    jasmine_node : {
       options : {
-        coffee  : false,
-        noStack : false
+        extensions: 'js',
+        specNameMatcher: 'spec'
       },
-      run     : {
-        spec    : "test/"
-      }
+      all     : [
+        "test/"
+      ]
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-jasmine-node');
+  grunt.loadNpmTasks('grunt-jasmine-node');
 
   // Default task(s).
   grunt.registerTask('default', [
     'jshint',
-    'jasmine-node'
+    'jasmine_node'
   ]);
 
 };
