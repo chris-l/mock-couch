@@ -4,7 +4,7 @@
   "description": "An http server pretending to be couchdb, for unit testing.",
   "main": "index.js",
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt"
   },
   "keywords": [
     "couchdb",
@@ -15,12 +15,16 @@
   "author": "Christopher Luna <dev@christopher-luna.com>",
   "license": "MIT",
   "readme": "# The Mock Couch\n\nAn http server pretending to be couchdb. It's designed mostly for unit testing couchdb apps.",
-  "repository" : {
-    "type" : "git",
-    "url" : "git@github.com:chris-l/mock-couch.git"
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:chris-l/mock-couch.git"
   },
   "dependencies": {
     "restify": "^2.7.0",
     "underscore": "^1.6.0"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.4",
+    "grunt-contrib-jshint": "^0.10.0"
   }
 }
