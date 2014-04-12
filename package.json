@@ -10,6 +10,7 @@
     "couchdb",
     "http",
     "server",
+    "testing",
     "mock"
   ],
   "author": "Christopher Luna <dev@christopher-luna.com>",
@@ -25,6 +26,7 @@
   },
   "devDependencies": {
     "grunt": "^0.4.4",
-    "grunt-contrib-jshint": "^0.10.0"
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-jasmine-node": "^0.1.1"
   }
 }
