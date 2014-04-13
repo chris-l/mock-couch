@@ -59,6 +59,10 @@ describe('myfun', function() {
   beforeEach(function() {
     // Starting the server
     var couchdb = mockCouch.createServer();
+
+    // Make sure you are either executing this test under a machine that does not have couchdb installed/enabled,
+    // or that you are using a different port!
+    // (which may require that you are able to specify the couchdb port on the function you are about to test)
     couchdb.listen(5984);
 
     // This creates a db for Mock Couch. The db is nothing but an array of objects.
