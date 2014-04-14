@@ -56,6 +56,7 @@ describe('_all_docs', function() {
     get({ params : { db : 'people' }, query : { include_docs : 'true' } }, res, dummy_function);
     expect(!!result.rows[0].doc).toBe(true);
     expect(result.rows[0].doc.name).toBe('marisa');
+    expect(result.rows[0].doc._id).toBe('magician');
   });
 
   it('should NOT include the documents if "include_docs" was not used', function() {
