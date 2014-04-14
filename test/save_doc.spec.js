@@ -5,10 +5,10 @@ var addDB = require('../lib/addDB'),
     save_doc_fn = require('../lib/save_doc');
 
 describe('save_doc', function() {
-  var mock_mock, save_doc;
+  var mock_mock, save_doc, result;
 
   var dummy_function = function() { };
-  var res = { send : dummy_function, setHeader : dummy_function };
+  var res = { send : function(status, obj) { result = obj; }, setHeader : dummy_function };
 
   beforeEach(function() {
    var db = {
@@ -54,5 +54,17 @@ describe('save_doc', function() {
     expect(mock_mock.databases.people.miko.name).toBe('reimu');
   });
 
+  it('must return the id of the document it just created', function() {
+    save_doc({ params : { db : 'people' }, body : { name : 'cirno' } }, res, dummy_function);
+    expect(/^\w+$/.test(result.id)).toBe(true);
+
+    save_doc({ params : { db : 'people', doc : 'player2' }, body : { name : 'sanae', lastname : 'kochiya' } }, res, dummy_function);
+    expect(result.id).toBe('player2');
+  });
+
+  it('must return the id of the document it just updated', function() {
+    save_doc({ params : { db : 'people', doc : 'miko' }, body : { _rev : '12345', name : 'sanae', lastname : 'kochiya' } }, res, dummy_function);
+    expect(result.id).toBe('miko');
+  });
 });
 
