@@ -5,10 +5,10 @@
 var del_fn = require('../lib/delete');
 
 describe('delete', function() {
-  var mock_mock, del;
+  var mock_mock, del, result;
 
   var dummy_function = function() { };
-  var res = { send : dummy_function, setHeader : dummy_function };
+  var res = { send : function(status, obj) { result = obj; }, setHeader : dummy_function };
 
   beforeEach(function() {
    var db = {
@@ -44,5 +44,10 @@ describe('delete', function() {
 
     del({ params : { db : 'people', doc : 'miko' }, query : {}, headers : { 'if-match' : '"12345"' } }, res, dummy_function);
     expect(!!mock_mock.databases.people.miko).toBe(false);
+  });
+
+  it('must return the id of the document it just deleted', function() {
+    del({ params : { db : 'people', doc : 'miko' }, query : {}, headers : { 'if-match' : '"12345"' } }, res, dummy_function);
+    expect(result.id).toBe('miko');
   });
 });
