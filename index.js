@@ -50,7 +50,7 @@ function MockCouch () {
     server.put('/:db', require('./lib/put_db')(self));
 
     // DELETE a document
-    server.del('/:db/:doc', require('./lib/delete')(self) );
+    server.del('/:db/:doc', require('./lib/delete_doc')(self) );
   }(server, this));
 
   this.addDB = require('./lib/addDB');

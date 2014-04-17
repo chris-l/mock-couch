@@ -2,9 +2,9 @@
 /* global describe, it, expect, beforeEach, afterEach */
 'use strict';
 
-var del_fn = require('../lib/delete');
+var del_fn = require('../lib/delete_doc');
 
-describe('delete', function() {
+describe('delete_doc', function() {
   var mock_mock, del, result;
 
   var dummy_function = function() { };
