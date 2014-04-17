@@ -35,6 +35,9 @@ function MockCouch () {
      * Add the routes
      */
 
+    // GET _all_dbs
+    server.get('/_all_dbs', require('./lib/all_dbs')(self));
+
     // GET _all_docs
     server.get('/:db/_all_docs', require('./lib/all_docs')(self));
 
