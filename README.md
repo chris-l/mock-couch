@@ -31,6 +31,7 @@ npm install --save-dev mock-couch
  - PUT a database
  - POST one document
  - DELETE one document
+ - DELETE a database
 
 ## Not yet implemented
 
