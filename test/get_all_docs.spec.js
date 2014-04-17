@@ -1,7 +1,8 @@
 /* jslint node: true */
 /* global describe, it, expect, beforeEach, afterEach */
 'use strict';
-var all_docs_fn = require('../lib/all_docs');
+var all_docs_fn = require('../lib/all_docs'),
+    mockDB      = require('../lib/mockDB');
 
 describe('_all_docs', function() {
   var mock_mock, get, result;
@@ -11,7 +12,7 @@ describe('_all_docs', function() {
 
   beforeEach(function() {
    var db = {
-     people : {
+     people : mockDB({
        miko : {
          _rev : '12345',
          name : 'reimu',
@@ -27,9 +28,9 @@ describe('_all_docs', function() {
          name : 'sanae',
          lastname : 'kochiya'
        }
-     }
+     })
    };
-   mock_mock = { emit : dummy_function, databases :  db };
+   mock_mock = { emit : dummy_function, databases : db };
    get = all_docs_fn(mock_mock);
   });
 
