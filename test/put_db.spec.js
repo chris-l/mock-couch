@@ -28,5 +28,22 @@ describe('put_db', function() {
     expect(result.hasOwnProperty('ok')).toBe(false);
     expect(result.hasOwnProperty('error')).toBe(true);
   });
+
+  it('should NOT allow to create a database with an invalid name', function() {
+    put_db({ params : { db : 'UPPER'} }, res, dummy_function);
+    expect(!!mock_mock.databases.UPPER).toBe(false);
+    expect(result.hasOwnProperty('ok')).toBe(false);
+    expect(result.hasOwnProperty('error')).toBe(true);
+
+    put_db({ params : { db : '12test'} }, res, dummy_function);
+    expect(!!mock_mock.databases['12test']).toBe(false);
+    expect(result.hasOwnProperty('ok')).toBe(false);
+    expect(result.hasOwnProperty('error')).toBe(true);
+
+    put_db({ params : { db : 'SomeDb'} }, res, dummy_function);
+    expect(!!mock_mock.databases.SomeDb).toBe(false);
+    expect(result.hasOwnProperty('ok')).toBe(false);
+    expect(result.hasOwnProperty('error')).toBe(true);
+  });
 });
 
