@@ -4,6 +4,8 @@
 
 Mock a CouchDB server for your unit tests.
 
+<img src="http://christopher-luna.com/mock-couch.svg" height="316" alt="A photo of a Mock Couch" title="'It's the thing Mock Couch Soup is made from,' said the Queen." />
+
 Mock Couch will create an HTTP server that emulates the responses of a real CouchDB server.
 Since it is an actual HTTP server, no matter if you use libraries like cradle and nano, your code should work out of the box.
 
