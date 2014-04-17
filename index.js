@@ -41,6 +41,9 @@ function MockCouch () {
     // GET _all_docs
     server.get('/:db/_all_docs', require('./lib/all_docs')(self));
 
+    // GET the info of certain database
+    server.get('/:db/', require('./lib/get_db')(self));
+
     // GET certain document
     server.get('/:db/:doc', require('./lib/get_doc')(self));
 
