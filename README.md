@@ -27,6 +27,8 @@ npm install --save-dev mock-couch
  - GET one document
  - GET `_all_docs`
    * including `include_docs=true`
+ - GET the information of a database
+ - GET `_all_dbs`
  - PUT one document
  - PUT a database
  - POST one document

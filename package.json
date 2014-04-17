@@ -1,6 +1,6 @@
 {
   "name": "mock-couch",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "An http server pretending to be couchdb, for unit testing.",
   "main": "index.js",
   "scripts": {
