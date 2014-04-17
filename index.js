@@ -46,6 +46,9 @@ function MockCouch () {
     server.put('/:db/:doc', put_doc);
     server.post('/:db/', put_doc);
 
+    // PUT a database
+    server.put('/:db', require('./lib/put_db')(self));
+
     // DELETE a document
     server.del('/:db/:doc', require('./lib/delete')(self) );
   }(server, this));
