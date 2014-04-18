@@ -25,8 +25,11 @@ npm install --save-dev mock-couch
 * The `mock_couch` object has a `databases` public property, to examine how the databases are in any moment.
 * Several of the CouchDB REST methods. Right now it has:
  - GET one document
- - GET `_all_docs`
-   * including `include_docs=true`
+ - GET `_all_docs, including:`
+   * `include_docs=true`
+   * `descending=true`
+   * `startkey`
+   * `endkey`
  - GET the information of a database
  - GET `_all_dbs`
  - PUT one document
@@ -39,7 +42,6 @@ npm install --save-dev mock-couch
 
 * Views (`_design` documents) with either map/reduce functions or just objects emulating their outputs.
 * Bulk insert/update documents
-* `startkey` and `endkey` for `_all_docs`
 * And a lot of other things!
 
 Keep in mind that Mock Couch is not attempting to fully implement CouchDB, but only the features necessary for unit testing CouchDB based apps.
