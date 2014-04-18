@@ -25,11 +25,11 @@ npm install --save-dev mock-couch
 * The `mock_couch` object has a `databases` public property, to examine how the databases are in any moment.
 * Several of the CouchDB REST methods. Right now it has:
  - GET one document
- - GET `_all_docs, including:`
-   * `include_docs=true`
-   * `descending=true`
-   * `startkey`
-   * `endkey`
+ - GET `_all_docs`, including:
+    - `include_docs=true`
+    - `descending=true`
+    - `startkey`
+    - `endkey`
  - GET the information of a database
  - GET `_all_dbs`
  - PUT one document
