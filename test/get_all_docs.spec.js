@@ -97,4 +97,11 @@ describe('_all_docs', function() {
     expect(result.rows[1]._id).toBe('player2');
     expect(result.rows[2]._id).toBe('miko');
   });
+
+  it('must allow to specify which documents I want by passing the keys using POST', function() {
+    get({ params : { db : 'people' }, query : { }, body : { keys : [ 'miko', 'qball' ] } }, res, dummy_function);
+    expect(result.rows.length).toBe(2);
+    expect(result.rows[0]._id).toBe('miko');
+    expect(result.rows[1]._id).toBe('qball');
+  });
 });

@@ -30,6 +30,7 @@ npm install --save-dev mock-couch
     - `descending=true`
     - `startkey`
     - `endkey`
+    - also, using `_all_docs` with POST to specify the desired keys
  - GET the information of a database
  - GET `_all_dbs`
  - PUT one document
