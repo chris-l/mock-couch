@@ -36,13 +36,15 @@ npm install --save-dev mock-couch
  - PUT one document
  - PUT a database
  - POST one document
+ - POST to `_bulk_docs` multiple documents
  - DELETE one document
  - DELETE a database
 
 ## Not yet implemented
 
 * Views (`_design` documents) with either map/reduce functions or just objects emulating their outputs.
-* Bulk insert/update documents
+* deleting by setting the `_deleted` member
+* `_changes`
 * And a lot of other things!
 
 Keep in mind that Mock Couch is not attempting to fully implement CouchDB, but only the features necessary for unit testing CouchDB based apps.
