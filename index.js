@@ -44,6 +44,9 @@ function MockCouch () {
     // POST _all_docs
     server.post('/:db/_all_docs', require('./lib/all_docs')(self));
 
+    // POST _bulk_docs
+    server.post('/:db/_bulk_docs', require('./lib/bulk_docs')(self));
+
     // GET the info of certain database
     server.get('/:db/', require('./lib/get_db')(self));
 
