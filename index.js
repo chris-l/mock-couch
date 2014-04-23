@@ -55,8 +55,13 @@ function MockCouch () {
     // GET the info of certain database
     server.get('/:db/', require('./lib/get_db')(self));
 
+    var get_doc = require('./lib/get_doc')(self);
+
+    // GET certain _design document
+    server.get('/:db/_design/:designdoc/', get_doc);
+
     // GET certain document
-    server.get('/:db/:doc', require('./lib/get_doc')(self));
+    server.get('/:db/:doc', get_doc);
 
     // PUT and POST a document
     var put_doc = require('./lib/save_doc')(self);
