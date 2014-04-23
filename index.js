@@ -17,7 +17,12 @@ function MockCouch () {
       formatters : {
         'application/json' : function(req, res, body) {
           res.setHeader('Server', 'CouchDB/1.0.1 (Erlang OTP/R13B)');
-          return JSON.stringify(body);
+          return JSON.stringify(body,function(key, val) {
+              if (typeof val === 'function') {
+                    return val.toString();
+              }
+              return val;
+          });
         }
       }
     });
