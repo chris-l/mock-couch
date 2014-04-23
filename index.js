@@ -55,6 +55,9 @@ function MockCouch () {
     // GET the info of certain database
     server.get('/:db/', require('./lib/get_db')(self));
 
+    // GET certain view
+    server.get('/:db/_design/:doc/_view/:name', require('./lib/get_view')(self));
+
     var get_doc = require('./lib/get_doc')(self);
 
     // GET certain _design document
