@@ -43,19 +43,19 @@ describe('_all_docs', function() {
     expect(result.total_rows).toBe(4);
 
     // alphabetical order
-    expect(result.rows[0]._id).toBe('magician');
-    expect(result.rows[1]._id).toBe('miko');
-    expect(result.rows[2]._id).toBe('player2');
+    expect(result.rows[0].id).toBe('magician');
+    expect(result.rows[1].id).toBe('miko');
+    expect(result.rows[2].id).toBe('player2');
   });
 
   it('should invert the order if "descending" was set to true', function() {
     get({ params : { db : 'people' }, query : { descending : 'true' } }, res, dummy_function);
 
     // inverse alphabetical order
-    expect(result.rows[0]._id).toBe('qball');
-    expect(result.rows[1]._id).toBe('player2');
-    expect(result.rows[2]._id).toBe('miko');
-    expect(result.rows[3]._id).toBe('magician');
+    expect(result.rows[0].id).toBe('qball');
+    expect(result.rows[1].id).toBe('player2');
+    expect(result.rows[2].id).toBe('miko');
+    expect(result.rows[3].id).toBe('magician');
   });
 
   it('should include the documents if "include_docs" was set to true', function() {
@@ -78,30 +78,30 @@ describe('_all_docs', function() {
 
   it('should limit the list if startkey and/or endkey is used', function() {
     get({ params : { db : 'people' }, query : { startkey : '"miko"' } }, res, dummy_function);
-    expect(result.rows[0]._id).toBe('miko');
-    expect(result.rows[1]._id).toBe('player2');
+    expect(result.rows[0].id).toBe('miko');
+    expect(result.rows[1].id).toBe('player2');
 
     get({ params : { db : 'people' }, query : { startkey : '"miko"', endkey : '"qball"' } }, res, dummy_function);
-    expect(result.rows[0]._id).toBe('miko');
+    expect(result.rows[0].id).toBe('miko');
 
     get({ params : { db : 'people' }, query : { endkey : '"player2"' } }, res, dummy_function);
     expect(result.rows.length).toBe(3);
 
     get({ params : { db : 'people' }, query : { endkey : '"miko"' } }, res, dummy_function);
-    expect(result.rows[1]._id).toBe('miko');
+    expect(result.rows[1].id).toBe('miko');
     expect(result.rows.length).toBe(2);
 
     get({ params : { db : 'people' }, query : { descending : 'true', startkey : '"qball"', endkey : '"miko"' } }, res, dummy_function);
     expect(result.rows.length).toBe(3);
-    expect(result.rows[0]._id).toBe('qball');
-    expect(result.rows[1]._id).toBe('player2');
-    expect(result.rows[2]._id).toBe('miko');
+    expect(result.rows[0].id).toBe('qball');
+    expect(result.rows[1].id).toBe('player2');
+    expect(result.rows[2].id).toBe('miko');
   });
 
   it('must allow to specify which documents I want by passing the keys using POST', function() {
     get({ params : { db : 'people' }, query : { }, body : { keys : [ 'miko', 'qball' ] } }, res, dummy_function);
     expect(result.rows.length).toBe(2);
-    expect(result.rows[0]._id).toBe('miko');
-    expect(result.rows[1]._id).toBe('qball');
+    expect(result.rows[0].id).toBe('miko');
+    expect(result.rows[1].id).toBe('qball');
   });
 });
