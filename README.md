@@ -42,7 +42,7 @@ npm install --save-dev mock-couch
 
 ## Not yet implemented
 
-* Views (`_design` documents) with either map/reduce functions or just objects emulating their outputs.
+* Right now, views (`_design` documents) are in very early stages.
 * deleting by setting the `_deleted` member
 * `_changes`
 * And a lot of other things!
