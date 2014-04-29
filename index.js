@@ -58,6 +58,9 @@ function MockCouch () {
     // GET certain view
     server.get('/:db/_design/:doc/_view/:name', require('./lib/get_view')(self));
 
+    // POST certain view
+    server.post('/:db/_design/:doc/_view/:name', require('./lib/get_view')(self));
+
     var get_doc = require('./lib/get_doc')(self);
 
     // GET certain _design document
