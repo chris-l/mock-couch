@@ -1,5 +1,5 @@
 /* jslint node: true */
-/* global describe, it, expect, beforeEach, afterEach */
+/*global describe, it, expect, beforeEach, afterEach */
 'use strict';
 var all_docs_fn = require('../lib/all_docs'),
     mockDB      = require('../lib/mockDB');

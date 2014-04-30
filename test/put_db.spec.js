@@ -1,5 +1,5 @@
 /* jslint node: true */
-/* global describe, it, expect, beforeEach, afterEach */
+/*global describe, it, expect, beforeEach, afterEach */
 'use strict';
 var put_db_fn = require('../lib/put_db');
 

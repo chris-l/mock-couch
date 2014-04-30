@@ -1,5 +1,5 @@
 /* jslint node: true */
-/* global describe, it, expect, beforeEach, afterEach */
+/*global describe, it, expect, beforeEach, afterEach */
 'use strict';
 var get_doc_fn = require('../lib/get_doc');
 

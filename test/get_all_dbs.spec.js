@@ -1,5 +1,5 @@
 /* jslint node: true */
-/* global describe, it, expect, beforeEach, afterEach */
+/*global describe, it, expect, beforeEach, afterEach */
 'use strict';
 var all_dbs_fn = require('../lib/all_dbs');
 
