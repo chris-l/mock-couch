@@ -85,6 +85,8 @@ function MockCouch () {
   }(server, this));
 
   this.addDB = require('./lib/addDB');
+  this.addDoc = require('./lib/addDoc');
+
   this.listen = function() {
     return server.listen.apply(server, arguments);
   };
