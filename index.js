@@ -88,7 +88,9 @@ function MockCouch () {
   this.addDoc = require('./lib/addDoc');
 
   this.listen = function() {
-    return server.listen.apply(server, arguments);
+    var args = [].slice.call(arguments, 0);
+    args[0] = args[0] || 5984;
+    return server.listen.apply(server, args);
   };
   this.close = function() {
     return server.close.apply(server, arguments);
