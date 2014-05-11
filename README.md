@@ -17,6 +17,17 @@ Mock Couch emit events, so you can listen to them to see the result of your test
 npm install --save-dev mock-couch
 ```
 
+## Changelog
+
+* 0.1.0
+ - **Support for views** (map and reduce functions). Create a `_design/` document to use them. Read more about them [here](http://chris-l.github.io/mock-couch/#views).
+ - Documentation available on http://chris-l.github.io/mock-couch/
+ - Added `AddDoc` method to add a document from the node.js side. Contrary to adding a document with a PUT, this is sync and allows you to specify the `_rev`
+
+## Documentation
+
+Visit the [Mock Couch website](http://chris-l.github.io/mock-couch/).
+
 ## Features
 
 * Implemented with [restify](https://github.com/mcavage/node-restify).
@@ -33,6 +44,7 @@ npm install --save-dev mock-couch
     - also, using `_all_docs` with POST to specify the desired keys
  - GET the information of a database
  - GET `_all_dbs`
+ - GET views (like `http://localhost:5984/database/_design/myviews/_view/someview/`)
  - PUT one document
  - PUT a database
  - POST one document
@@ -42,7 +54,6 @@ npm install --save-dev mock-couch
 
 ## Not yet implemented
 
-* Right now, views (`_design` documents) are in very early stages.
 * deleting by setting the `_deleted` member
 * `_changes`
 * And a lot of other things!
