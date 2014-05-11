@@ -1,10 +1,10 @@
-<h1><img src="https://raw.github.com/chris-l/mock-couch/master/title.png" alt="The Mock Couch" width="500px" height="97px" /></h1>
+<h1><img src="http://chris-l.github.io/mock-couch/img/title.png" alt="The Mock Couch" width="500px" height="97px" /></h1>
 
 [![Build Status](https://travis-ci.org/chris-l/mock-couch.png?branch=master)](https://travis-ci.org/chris-l/mock-couch)
 
 Mock a CouchDB server for your unit tests.
 
-<img src="http://christopher-luna.com/mock-couch.svg" height="316" alt="A photo of a Mock Couch" title="'It's the thing Mock Couch Soup is made from,' said the Queen." />
+<img src="http://chris-l.github.io/mock-couch/img/mock-couch.svg" height="316" alt="A photo of a Mock Couch" title="&quot;It's the thing Mock Couch Soup is made from,&quot; said the Queen." />
 
 Mock Couch will create an HTTP server that emulates the responses of a real CouchDB server.
 Since it is an actual HTTP server, no matter if you use libraries like cradle and nano, your code should work out of the box.
@@ -22,7 +22,7 @@ npm install --save-dev mock-couch
 * 0.1.0
  - **Support for views** (map and reduce functions). Create a `_design/` document to use them. Read more about them [here](http://chris-l.github.io/mock-couch/#views).
  - Documentation available on http://chris-l.github.io/mock-couch/
- - Added `AddDoc` method to add a document from the node.js side. Contrary to adding a document with a PUT, this is sync and allows you to specify the `_rev`
+ - Added `addDoc` method to add a document from the node.js side. Contrary to adding a document with a PUT, this is sync and allows you to specify the `_rev`
 
 ## Documentation
 
