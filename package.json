@@ -2,6 +2,7 @@
   "name": "mock-couch",
   "version": "0.1.0",
   "description": "An http server pretending to be couchdb, for unit testing.",
+  "homepage" : "http://chris-l.github.io/mock-couch/",
   "main": "index.js",
   "scripts": {
     "test": "grunt"
