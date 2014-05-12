@@ -39,7 +39,7 @@ describe('_all_docs', function() {
   });
 
   it('should get the list of all documents', function() {
-    get({ params : { db : 'people' }, query : { } }, res, dummy_function);
+    get({ route : { method : 'GET' }, params : { db : 'people' }, query : { } }, res, dummy_function);
     expect(result.total_rows).toBe(4);
 
     // alphabetical order
@@ -49,7 +49,7 @@ describe('_all_docs', function() {
   });
 
   it('should invert the order if "descending" was set to true', function() {
-    get({ params : { db : 'people' }, query : { descending : 'true' } }, res, dummy_function);
+    get({ route : { method : 'GET' }, params : { db : 'people' }, query : { descending : 'true' } }, res, dummy_function);
 
     // inverse alphabetical order
     expect(result.rows[0].id).toBe('qball');
@@ -59,39 +59,39 @@ describe('_all_docs', function() {
   });
 
   it('should include the documents if "include_docs" was set to true', function() {
-    get({ params : { db : 'people' }, query : { include_docs : 'true' } }, res, dummy_function);
+    get({ route : { method : 'GET' }, params : { db : 'people' }, query : { include_docs : 'true' } }, res, dummy_function);
     expect(!!result.rows[0].doc).toBe(true);
     expect(result.rows[0].doc.name).toBe('marisa');
     expect(result.rows[0].doc._id).toBe('magician');
   });
 
   it('should NOT include the documents if "include_docs" was not used', function() {
-    get({ params : { db : 'people' }, query : { } }, res, dummy_function);
+    get({ route : { method : 'GET' }, params : { db : 'people' }, query : { } }, res, dummy_function);
     expect(!!result.rows[0].doc).toBe(false);
 
-    get({ params : { db : 'people' }, query : { include_docs : 'false' } }, res, dummy_function);
+    get({ route : { method : 'GET' }, params : { db : 'people' }, query : { include_docs : 'false' } }, res, dummy_function);
     expect(!!result.rows[0].doc).toBe(false);
 
-    get({ params : { db : 'people' }, query : { include_docs : '' } }, res, dummy_function);
+    get({ route : { method : 'GET' }, params : { db : 'people' }, query : { include_docs : '' } }, res, dummy_function);
     expect(!!result.rows[0].doc).toBe(false);
   });
 
   it('should limit the list if startkey and/or endkey is used', function() {
-    get({ params : { db : 'people' }, query : { startkey : '"miko"' } }, res, dummy_function);
+    get({ route : { method : 'GET' }, params : { db : 'people' }, query : { startkey : '"miko"' } }, res, dummy_function);
     expect(result.rows[0].id).toBe('miko');
     expect(result.rows[1].id).toBe('player2');
 
-    get({ params : { db : 'people' }, query : { startkey : '"miko"', endkey : '"qball"' } }, res, dummy_function);
+    get({ route : { method : 'GET' }, params : { db : 'people' }, query : { startkey : '"miko"', endkey : '"qball"' } }, res, dummy_function);
     expect(result.rows[0].id).toBe('miko');
 
-    get({ params : { db : 'people' }, query : { endkey : '"player2"' } }, res, dummy_function);
+    get({ route : { method : 'GET' }, params : { db : 'people' }, query : { endkey : '"player2"' } }, res, dummy_function);
     expect(result.rows.length).toBe(3);
 
-    get({ params : { db : 'people' }, query : { endkey : '"miko"' } }, res, dummy_function);
+    get({ route : { method : 'GET' }, params : { db : 'people' }, query : { endkey : '"miko"' } }, res, dummy_function);
     expect(result.rows[1].id).toBe('miko');
     expect(result.rows.length).toBe(2);
 
-    get({ params : { db : 'people' }, query : { descending : 'true', startkey : '"qball"', endkey : '"miko"' } }, res, dummy_function);
+    get({ route : { method : 'GET' }, params : { db : 'people' }, query : { descending : 'true', startkey : '"qball"', endkey : '"miko"' } }, res, dummy_function);
     expect(result.rows.length).toBe(3);
     expect(result.rows[0].id).toBe('qball');
     expect(result.rows[1].id).toBe('player2');
@@ -99,7 +99,7 @@ describe('_all_docs', function() {
   });
 
   it('must allow to specify which documents I want by passing the keys using POST', function() {
-    get({ params : { db : 'people' }, query : { }, body : { keys : [ 'miko', 'qball' ] } }, res, dummy_function);
+    get({ route : { method : 'POST' }, params : { db : 'people' }, query : { }, body : { keys : [ 'miko', 'qball' ] } }, res, dummy_function);
     expect(result.rows.length).toBe(2);
     expect(result.rows[0].id).toBe('miko');
     expect(result.rows[1].id).toBe('qball');

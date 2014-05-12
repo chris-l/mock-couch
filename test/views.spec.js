@@ -56,14 +56,14 @@ describe('views', function() {
 
 
   it('should execute the reduce function by default, with no grouping', function() {
-    get({ params : { db : 'people', doc : 'designer', name : 'someview' }, query : { } }, res, dummy_function);
+    get({ route : { method : 'GET' }, params : { db : 'people', doc : 'designer', name : 'someview' }, query : { } }, res, dummy_function);
     expect(result.rows.length).toBe(1);
     expect(result.rows[0].key).toBe(null);
     expect(result.rows[0].value).toBe('qballqballplayer2player2mikomikomagicianmagician');
   });
 
   it('should be able to use grouping', function() {
-    get({ params : { db : 'people', doc : 'designer', name : 'someview' }, query : { group : 'true' } }, res, dummy_function);
+    get({ route : { method : 'GET' }, params : { db : 'people', doc : 'designer', name : 'someview' }, query : { group : 'true' } }, res, dummy_function);
     expect(result.rows.length).toBe(5);
     expect(result.rows[0].key).toBe(null);
     expect(result.rows[1].key[0]).toBe('magician');
@@ -71,12 +71,12 @@ describe('views', function() {
     expect(result.rows[4].key.length).toBe(1);
   });
   it('should be able to use descending', function() {
-    get({ params : { db : 'people', doc : 'designer', name : 'someview' }, query : { group : 'true', descending : 'true' } }, res, dummy_function);
+    get({ route : { method : 'GET' }, params : { db : 'people', doc : 'designer', name : 'someview' }, query : { group : 'true', descending : 'true' } }, res, dummy_function);
     expect(result.rows[0].key[0]).toBe('qball');
     expect(result.rows[1].key[0]).toBe('player2');
   });
   it('should be able to execute only the map, by disabling reduce', function() {
-    get({ params : { db : 'people', doc : 'designer', name : 'someview' }, query : { reduce : 'false' } }, res, dummy_function);
+    get({ route : { method : 'GET' }, params : { db : 'people', doc : 'designer', name : 'someview' }, query : { reduce : 'false' } }, res, dummy_function);
     expect(result.total_rows).toBe(8);
     expect(result.rows[0].id).toBe('magician');
     expect(result.rows[0].key).toBe(null);

@@ -19,6 +19,8 @@ npm install --save-dev mock-couch
 
 ## Changelog
 
+* 0.1.1
+ - The emitted events are now standarized. Read about the [events](http://chris-l.github.io/mock-couch/#events) on the documentation.
 * 0.1.0
  - **Support for views** (map and reduce functions). Create a `_design/` document to use them. Read more about them [here](http://chris-l.github.io/mock-couch/#views).
  - Documentation available on http://chris-l.github.io/mock-couch/
