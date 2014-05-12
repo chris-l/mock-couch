@@ -102,7 +102,62 @@ result.id === &#39;third&#39;; // true</code></pre>
 <p>Then you can try the view from <code>http://localhost:5984/mydatabase/_design/myviews/_view/someview/</code></p>
 <h2 id="events">Events</h2>
 
-<p><strong>TBD</strong> (pretty soon!)</p>
+<p>Each HTTP request emit an event when is responded.</p>
+<p><strong>The name of the emitted event is the HTTP method of the request</strong> (that is, the name can be GET, POST, PUT or DELETE), and the passed argument is an object that have details about the processed request.</p>
+<p>The properties of the object passed to each event are the following:</p>
+<h3>GET _all_dbs</h3>
+<ul>
+<li><code>type</code> <em>String</em> The value <code>_all_dbs</code>.</li>
+<li><code>databases</code> <em>Array</em> A list with the names of the databases.</li>
+</ul>
+<h3>GET / POST _all_docs</h3>
+<ul>
+<li><code>type</code> <em>String</em> The value <code>_all_docs</code>.</li>
+<li><code>database</code> <em>String</em> Name of the database.</li>
+<li><code>rows</code> <em>Array</em> A list with the rows from the database.</li>
+</ul>
+<h3>POST _bulk_docs</h3>
+<ul>
+<li><code>type</code> <em>String</em> The value <code>_bulk_docs</code></li>
+<li><code>docs</code> <em>Array</em> A list with the docs that just been inserted.</li>
+</ul>
+<h3>DELETE database</h3>
+<ul>
+<li><code>type</code> <em>String</em> The value <code>database</code></li>
+<li><code>database</code> <em>String</em> The name of the deleted database</li>
+</ul>
+<h3>DELETE document</h3>
+<ul>
+<li><code>type</code> <em>String</em> The value <code>document</code></li>
+<li><code>id</code> <em>String</em> The id of the deleted document</li>
+</ul>
+<h3>GET document</h3>
+<ul>
+<li><code>type</code> <em>String</em> The value <code>document</code></li>
+<li><code>id</code> <em>String</em> The id of the requested document</li>
+<li><code>doc</code> <em>Object</em> The requested document</li>
+</ul>
+<h3>GET / POST view</h3>
+<ul>
+<li><code>type</code> <em>String</em> The value <code>view</code></li>
+<li><code>name</code> <em>String</em> The name of the design document</li>
+<li><code>group</code> <em>Boolean</em> Is grouping being used?</li>
+<li><code>reduce</code> <em>Boolean</em> Is reduce being used?</li>
+<li><code>database</code> <em>String</em> The name of the database</li>
+<li><code>view</code> <em>String</em> The name of the view processed</li>
+<li><code>output</code> The result of view functions (map and optionally, reduce)</li>
+</ul>
+<h3>PUT database</h3>
+<ul>
+<li><code>type</code> <em>String</em> The value <code>database</code></li>
+<li><code>database</code> <em>String</em> The name of the database</li>
+</ul>
+<h3>PUT / POST document</h3>
+<ul>
+<li><code>type</code> <em>String</em> The value <code>document</code></li>
+<li><code>id</code> <em>String</em> The name of the document</li>
+<li><code>doc</code> <em>Object</em> The document</li>
+</ul>
 <h2 id="license">License</h2>
 
 <p><strong>MIT</strong></p>
