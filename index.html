@@ -13,24 +13,18 @@
 
 <p>Mock Couch is available as an <a href="https://www.npmjs.org/package/mock-couch">npm module</a>.</p>
 <pre><code>npm install --save-dev mock-couch</code></pre>
-<h2 id="create">Create a Mock Couch Instance</h1>
+<h2 id="create">Create a Mock Couch Instance</h2>
 
-To create an instance, it&#39;s necesary to require the module, and then call the <code>createServer()</code> method.
+<p>To create an instance, it&#39;s necesary to require the module, and then call the <code>createServer()</code> method.</p>
+<pre><code class="language-javascript">var mock = require(&#39;mock-couch&#39;);</code></pre>
+<p>The returned object is the <strong>mock couch</strong> instance, where the databases and documents should be added.</p>
+<p>Once is that is done, its necessary to start the server by calling the <code>listen()</code> method.</p>
+<h3 id="createServer">createServer
+  <code>mock.createServer()</code>
+</h3>
 
-<code>javascript
-var mock = require(&#39;mock-couch&#39;);</code>
-
-The returned object is the <strong>mock couch</strong> instance, where the databases and documents should be added.
-
-Once is that is done, its necessary to start the server by calling the <code>listen()</code> method.
-
-<a id="createServer"></a>
-### createServer <code>mock.createServer()</code>
-
-Returns an object representing the <strong>mock couch</strong> instance.
-<code>javascript
-var mockCouch = mock.createServer();</code>
-
+<p>Returns an object representing the <strong>mock couch</strong> instance.</p>
+<pre><code class="language-javascript">var mockCouch = mock.createServer();</code></pre>
 <h2 id="methods">Instance Methods</h2>
 
 <p>Each <strong>mock couch</strong> instance has the following methods:</p>
