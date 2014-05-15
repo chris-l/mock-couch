@@ -8,9 +8,11 @@ var restify = require('restify'),
 
 
 
-function MockCouch () {
+function MockCouch (options) {
   events.EventEmitter.call(this);
-
+  if (!options) {
+    options = {};
+  }
   /** The var 'server' contains the restify server */
   var server = (function() {
     var server = restify.createServer({
@@ -29,6 +31,12 @@ function MockCouch () {
     server.use(restify.bodyParser({ mapParams: false }));
     server.pre(restify.pre.sanitizePath());
     server.use(restify.queryParser());
+    if (options.keepAlive === false) {
+      server.pre(function preventKeepAlive(req, res, next) {
+        res.setHeader('Connection', 'close');
+        next();
+      });
+    }
     return server;
   }());
 
@@ -99,8 +107,8 @@ function MockCouch () {
 util.inherits(MockCouch, events.EventEmitter);
 
 module.exports = {
-  createServer : function() {
+  createServer : function(options) {
     /** Returns a brand new mock couch! */
-    return new MockCouch();
+    return new MockCouch(options);
   }
 };
