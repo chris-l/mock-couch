@@ -112,6 +112,12 @@ describe('myfun', function() {
 });
 ```
 
+If your testing requires the frequent setup and teardown of the mock server, it may be beneficial to prevent keep-alive connections. The server will always return a `Connection: close` header if constructed with a `keepAlive` option set to `false`.
+
+```
+var couchdb = mockCouch.createServer({ keepAlive: false });
+```
+
 ## Status
 
 Is still in its alpha stage, so its possible that it changes a lot.
