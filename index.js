@@ -48,34 +48,36 @@ function MockCouch (options) {
      * Add the routes
      */
 
-    // GET _all_dbs
-    server.get('/_all_dbs', require('./lib/all_dbs')(self));
+    // GET and HEAD _all_dbs
+    var all_dbs = require('./lib/all_dbs')(self);
+    server.get('/_all_dbs', all_dbs);
+    server.head('/_all_dbs', all_dbs);
 
-    // GET _all_docs
-    server.get('/:db/_all_docs', require('./lib/all_docs')(self));
-
-    // POST _all_docs
-    server.post('/:db/_all_docs', require('./lib/all_docs')(self));
+    // GET, HEAD, and POST _all_docs
+    var all_docs = require('./lib/all_docs')(self);
+    server.get('/:db/_all_docs', all_docs);
+    server.head('/:db/_all_docs', all_docs);
+    server.post('/:db/_all_docs', all_docs);
 
     // POST _bulk_docs
     server.post('/:db/_bulk_docs', require('./lib/bulk_docs')(self));
 
-    // GET the info of certain database
-    server.get('/:db/', require('./lib/get_db')(self));
+    // GET and HEAD the info of certain database
+    var get_db = require('./lib/get_db')(self);
+    server.get('/:db/', get_db);
+    server.head('/:db/', get_db);
 
-    // GET certain view
-    server.get('/:db/_design/:doc/_view/:name', require('./lib/get_view')(self));
+    // GET and POST a certain view
+    var get_view = require('./lib/get_view')(self);
+    server.get('/:db/_design/:doc/_view/:name', get_view);
+    server.post('/:db/_design/:doc/_view/:name', get_view);
 
-    // POST certain view
-    server.post('/:db/_design/:doc/_view/:name', require('./lib/get_view')(self));
-
+    // GET and HEAD a certain document or _design document
     var get_doc = require('./lib/get_doc')(self);
-
-    // GET certain _design document
     server.get('/:db/_design/:designdoc/', get_doc);
-
-    // GET certain document
+    server.head('/:db/_design/:designdoc/', get_doc);
     server.get('/:db/:doc', get_doc);
+    server.head('/:db/:doc', get_doc);
 
     // PUT and POST a document
     var put_doc = require('./lib/save_doc')(self);
