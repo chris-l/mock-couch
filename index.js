@@ -19,6 +19,13 @@ function MockCouch (options) {
       formatters : {
         'application/json' : function(req, res, body) {
           res.setHeader('Server', 'CouchDB/1.0.1 (Erlang OTP/R13B)');
+
+          // Check if the client *explicitly* accepts application/json. If not, send text/plain
+          var sendPlainText = (req.header('Accept').split(/, */).indexOf('application/json') === -1);
+          if(sendPlainText) {
+            res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+          }
+
           return JSON.stringify(body,function(key, val) {
               if (typeof val === 'function') {
                     return val.toString();
