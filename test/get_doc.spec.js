@@ -4,10 +4,10 @@
 var get_doc_fn = require('../lib/get_doc');
 
 describe('get_doc', function() {
-  var mock_mock, get, result;
+  var mock_mock, get, statusCode, result;
 
   var dummy_function = function() { };
-  var res = { send : function(status, obj) { result = obj; }, setHeader : dummy_function };
+  var res = { send : function(status, obj) { statusCode = status; result = obj; }, setHeader : dummy_function };
 
   beforeEach(function() {
    var db = {
@@ -36,6 +36,20 @@ describe('get_doc', function() {
   it('should get any existing document', function() {
     get({ params : { db : 'people', doc : 'miko' } }, res, dummy_function);
     expect(result._id).toBe('miko');
+  });
+
+  it('should return an error if the database does not exist', function() {
+    get({ params : { db : 'nofound', doc : 'miko' } }, res, dummy_function);
+    expect(statusCode).toBe(404);
+    expect(result.error).toBe('not_found');
+    expect(result.reason).toBe('no_db_file');
+  });
+
+  it('should return an error if the document does not exist', function() {
+    get({ params : { db : 'people', doc : 'notfound' } }, res, dummy_function);
+    expect(statusCode).toBe(404);
+    expect(result.error).toBe('not_found');
+    expect(result.reason).toBe('missing');
   });
 
 });
