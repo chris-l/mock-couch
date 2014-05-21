@@ -22,7 +22,7 @@ function MockCouch (options) {
           res.setHeader('Cache-Control', 'must-revalidate');
 
           // Check if the client *explicitly* accepts application/json. If not, send text/plain
-          var sendPlainText = (req.header('Accept').split(/, */).indexOf('application/json') === -1);
+          var sendPlainText = (req.header('Accept') !== undefined && req.header('Accept').split(/, */).indexOf('application/json') === -1);
           if(sendPlainText) {
             res.setHeader('Content-Type', 'text/plain; charset=utf-8');
           }
