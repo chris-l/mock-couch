@@ -85,4 +85,14 @@ describe('views', function() {
     expect(result.rows[7].id).toBe('qball');
     //console.log(JSON.stringify(result, null, ' '));
   });
+  it('should be able to get only one specific key, by disabling reduce', function() {
+    get({ route : { method : 'GET' }, params : { db : 'people', doc : 'designer', name : 'someview' }, query : { reduce : 'false', key : '["qball"]' } }, res, dummy_function);
+    expect(result.rows.length).toBe(1);
+    expect(result.rows[0].key[0]).toBe('qball');
+  });
+  it('should be able to get only one specific key, by using reduce with group', function() {
+    get({ route : { method : 'GET' }, params : { db : 'people', doc : 'designer', name : 'someview' }, query : { group : 'true', key : '["qball"]' } }, res, dummy_function);
+    expect(result.rows.length).toBe(1);
+    expect(result.rows[0].key[0]).toBe('qball');
+  });
 });
