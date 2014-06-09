@@ -19,6 +19,11 @@ npm install --save-dev mock-couch
 
 ## Changelog
 
+* 0.1.2
+ - Added HEAD requests. (Credits to @davidwood)
+ - Added option to prevent keep-alive connections. (Credits to @davidwood)
+ - Now is possible to use the query option `key` on views.
+ - Other fixes.
 * 0.1.1
  - The emitted events are now standarized. Read about the [events](http://chris-l.github.io/mock-couch/#events) on the documentation.
 * 0.1.0
