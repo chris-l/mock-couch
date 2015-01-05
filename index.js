@@ -50,6 +50,7 @@ function MockCouch (options) {
 
   // This is where the mock databases dwell
   this.databases = {};
+  this.changes = {};
 
   (function (server, self) {
     /**
@@ -74,6 +75,10 @@ function MockCouch (options) {
     var get_db = require('./lib/get_db')(self);
     server.get('/:db/', get_db);
     server.head('/:db/', get_db);
+
+    // GET _changes feed
+    var get_changes = require('./lib/get_changes')(self);
+    server.get('/:db/_changes', get_changes);
 
     // GET and POST a certain view
     var get_view = require('./lib/get_view')(self);
