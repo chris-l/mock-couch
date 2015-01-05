@@ -38,7 +38,6 @@ function MockCouch (options) {
           res.setHeader('Server', 'CouchDB/1.0.1 (Erlang OTP/R13B)');
           res.setHeader('Cache-Control', 'must-revalidate');
         
-          console.log(body);
           return body;
         }
       }
