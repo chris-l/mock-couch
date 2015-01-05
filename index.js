@@ -33,6 +33,13 @@ function MockCouch (options) {
               }
               return val;
           });
+        },
+        'application/octet-stream' : function(req, res, body) {
+          res.setHeader('Server', 'CouchDB/1.0.1 (Erlang OTP/R13B)');
+          res.setHeader('Cache-Control', 'must-revalidate');
+        
+          console.log(body);
+          return body;
         }
       }
     });
