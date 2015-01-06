@@ -57,6 +57,7 @@ function MockCouch (options) {
   // This is where the mock databases dwell
   this.databases = {};
   this.changes = {};
+  this.sequence = {};
 
   (function (server, self) {
     /**
