@@ -32,7 +32,7 @@ describe('_bulk_docs', function() {
    mock_mock = {
      emit : dummy_function,
      databases :  db,
-     changes : { people : { } },
+     changes : { people : [] },
      sequence : { people : 3 }
    };
    bulkDocs = bulk_docs_fn(mock_mock);

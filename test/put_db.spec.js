@@ -12,8 +12,8 @@ describe('put_db', function() {
   beforeEach(function() {
    mock_mock = { 
      emit : dummy_function,
-     databases :  { existing : {} } };
-     changes : { existing : { } },
+     databases :  { existing : {} },
+     changes : { existing : [] },
      sequence : { existing : 0 }
    };
    put_db = put_db_fn(mock_mock);

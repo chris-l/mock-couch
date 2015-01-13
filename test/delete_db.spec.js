@@ -23,7 +23,7 @@ describe('delete_db', function() {
    mock_mock = {
      emit : dummy_function,
      databases :  db,
-     changes : { people : { } },
+     changes : { people : [] },
      sequence : { people : 1 }
    };
    del = del_fn(mock_mock);
