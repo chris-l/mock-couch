@@ -7,7 +7,7 @@ describe('addDB', function() {
   var mock_mock;
 
   beforeEach(function() {
-   mock_mock = { databases : {}, changes : {}, sequence : {} };
+   mock_mock = { databases : {} };
   });
 
     it('should accept an array and add it as a database', function() {

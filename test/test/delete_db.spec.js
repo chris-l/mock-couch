@@ -20,12 +20,7 @@ describe('delete_db', function() {
        }
      }
    };
-   mock_mock = {
-     emit : dummy_function,
-     databases :  db,
-     changes : { people : { } },
-     sequence : { people : 1 }
-   };
+   mock_mock = { emit : dummy_function, databases :  db };
    del = del_fn(mock_mock);
   });
 

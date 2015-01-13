@@ -10,12 +10,7 @@ describe('put_db', function() {
   var res = { send : function(status, obj) { result = obj; }, setHeader : dummy_function };
 
   beforeEach(function() {
-   mock_mock = { 
-     emit : dummy_function,
-     databases :  { existing : {} } };
-     changes : { existing : { } },
-     sequence : { existing : 0 }
-   };
+   mock_mock = { emit : dummy_function, databases :  { existing : {} } };
    put_db = put_db_fn(mock_mock);
   });
 
