@@ -20,7 +20,12 @@ describe('delete_doc', function() {
        }
      }
    };
-   mock_mock = { emit : dummy_function, databases :  db };
+   mock_mock = {
+     emit : dummy_function,
+     databases :  db,
+     changes : { people : [] },
+     sequence : { people : 1 }
+   };
    del = del_fn(mock_mock);
   });
 

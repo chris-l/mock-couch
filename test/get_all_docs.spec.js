@@ -34,7 +34,12 @@ describe('_all_docs', function() {
        }
      })
    };
-   mock_mock = { emit : dummy_function, databases : db };
+   mock_mock = {
+     emit : dummy_function,
+     databases :  db,
+     changes : { people : [] },
+     sequence : { people : 4 }
+   };
    get = all_docs_fn(mock_mock);
   });
 

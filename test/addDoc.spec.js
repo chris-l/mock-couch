@@ -10,7 +10,7 @@ describe('addDoc', function() {
 
   beforeEach(function() {
    db = { people : mockDB({ }) };
-   mock_mock = { emit : dummy_function, databases : db };
+   mock_mock = { emit : dummy_function, databases : db, changes : { people : [] }, sequence : { people : 0 } };
   });
 
   it('should accept an object and add it as a document to the database', function() {

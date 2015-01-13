@@ -20,7 +20,12 @@ describe('save_doc', function() {
        }
      }
    };
-   mock_mock = { emit : dummy_function, databases :  db };
+   mock_mock = {
+     emit : dummy_function,
+     databases :  db,
+     changes : { people : [ ] },
+     sequence : { people : 1 }
+   };
    save_doc = save_doc_fn(mock_mock);
   });
 
