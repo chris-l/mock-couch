@@ -1,11 +1,19 @@
-/* jslint node: true */
+/*jslint node: true, indent: 2 */
 'use strict';
 module.exports = function (grunt) {
 
   grunt.initConfig({
     pkg     : grunt.file.readJSON('package.json'),
-    jshint  : {
-      all     : [ 'package.json', 'Gruntfile.js', 'index.js', 'lib/**/*.js', 'test/**/*.js' ]
+    jslint  : {
+      all     : {
+        src : [ 'package.json', 'Gruntfile.js', 'index.js', 'lib/**/*.js', 'test/**/*.js' ],
+        directives : {
+          indent : 2,
+          node   : true,
+          nomen  : true,
+          regexp : true
+        }
+      }
     },
     jasmine_node : {
       options : {
@@ -18,12 +26,12 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-jslint');
   grunt.loadNpmTasks('grunt-jasmine-node');
 
   // Default task(s).
   grunt.registerTask('default', [
-    'jshint',
+    'jslint',
     'jasmine_node'
   ]);
 
