@@ -2,7 +2,7 @@
   "name": "mock-couch",
   "version": "0.1.2",
   "description": "An http server pretending to be couchdb, for unit testing.",
-  "homepage" : "http://chris-l.github.io/mock-couch/",
+  "homepage": "http://chris-l.github.io/mock-couch/",
   "main": "index.js",
   "scripts": {
     "test": "grunt"
@@ -21,6 +21,7 @@
     "url": "git@github.com:chris-l/mock-couch.git"
   },
   "dependencies": {
+    "ramda": "^0.8.0",
     "restify": "^2.7.0",
     "underscore": "^1.6.0"
   },
