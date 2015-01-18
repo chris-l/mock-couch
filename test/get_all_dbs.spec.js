@@ -31,7 +31,12 @@ describe('_all_dbs', function() {
        },
      }
    };
-   mock_mock = { emit : dummy_function, databases :  db };
+   mock_mock = {
+     emit : dummy_function,
+     databases :  db,
+     changes : { people : [] },
+     sequence : { people : 2 }
+   };
    get = all_dbs_fn(mock_mock);
   });
 
