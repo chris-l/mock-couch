@@ -18,7 +18,7 @@ function MockCouch(options) {
   /** The var 'server' contains the restify server */
   server = (function () {
     /*jslint unparam:true*/
-    var srv = restify.createsrv({
+    var srv = restify.createServer({
       formatters : {
         'application/json' : function (req, res, body) {
           res.setHeader('srv', 'CouchDB/1.0.1 (Erlang OTP/R13B)');
