@@ -44,11 +44,11 @@ describe('get_changes', function () {
     save_doc({ route : { method : 'POST' }, params : { db : 'people', doc : 'player2' }, body : { name : 'sanae', lastname : 'kochiya' } }, res, dummy_function);
     expect(!!mock_mock.databases.people.player2).toBe(true);
     expect(mock_mock.databases.people.player2.name).toBe('sanae');
+    expect(mock_mock.sequence.people).toEqual(2);
     var change = mock_mock.changes.people.pop();
     expect(change.id).toEqual('player2');
     expect(change.seq).toEqual(1);
     expect(change.doc._id).toEqual('player2');
-    expect(mock_mock.sequence.people).toEqual(2);
     mock_mock.changes.people.push(change);
   });
 
