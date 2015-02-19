@@ -21,37 +21,21 @@ describe('get_changes', function () {
   /*jslint unparam: false*/
 
   beforeEach(function () {
-    var db = {
-      people : {
-        miko : {
-          _rev : '12345',
-          name : 'reimu',
-          lastname : 'hakurei'
-        }
-      }
-    };
     mock_mock = {
       emit : dummy_function,
-      databases :  db,
-      changes : {
-        people : [
-          {
-            id     : 'miko',
-            seq     : 0,
-            changes : [],
-            doc     : {
-              name      : 'reimu',
-              lastname  : 'hakurei',
-              _rev      : '12345',
-              _id       : 'miko'
-            }
-          }
-        ]
-      },
-      sequence : {
-        people : 1
-      }
+      databases : {},
+      changes : {},
+      sequence : {}
     };
+    addDB.call(mock_mock, 'people', [
+      {
+        _id : 'miko',
+        _rev : '12345',
+        name : 'reimu',
+        lastname : 'hakurei'
+      }
+    ]);
+
     save_doc = save_doc_fn(mock_mock);
     get_changes = get_changes_fn(mock_mock);
   });
