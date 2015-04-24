@@ -5,7 +5,7 @@ var all_docs_fn = require('../lib/all_docs'),
   mockDB = require('../lib/mockDB');
 
 describe('_all_docs', function () {
-  var mock_mock, get, statusCode, result, dummy_function, res;
+  var mock_mock, get, result, dummy_function, res;
 
   dummy_function = function () {
     return;
@@ -13,7 +13,6 @@ describe('_all_docs', function () {
   /*jslint unparam: true*/
   res = {
     send : function (status, obj) {
-      statusCode = status;
       result = obj;
     },
     setHeader : dummy_function
@@ -51,13 +50,6 @@ describe('_all_docs', function () {
       sequence : { people : 4 }
     };
     get = all_docs_fn(mock_mock);
-  });
-
-  it('should return an error if the database does not exist', function () {
-    get({ route : { method : 'GET' }, params : { db : 'nofound' }, query : { } }, res, dummy_function);
-    expect(statusCode).toBe(404);
-    expect(result.error).toBe('not_found');
-    expect(result.reason).toBe('no_db_file');
   });
 
   it('should get the list of all documents', function () {

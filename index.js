@@ -72,6 +72,9 @@ function MockCouch(options) {
     server.get('/_all_dbs', all_dbs);
     server.head('/_all_dbs', all_dbs);
 
+    // Check if the database exists.
+    server.use(require('./lib/check_db')(self));
+
     // GET, HEAD, and POST _all_docs
     all_docs = require('./lib/all_docs')(self);
     server.get('/:db/_all_docs', all_docs);
