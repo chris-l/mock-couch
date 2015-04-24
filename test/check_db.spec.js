@@ -1,7 +1,7 @@
 /*jslint node: true, indent: 2 , nomen  : true */
 /*global describe, it, expect, beforeEach, afterEach */
 'use strict';
-var all_docs_fn = require('../lib/open_db'),
+var all_docs_fn = require('../lib/check_db'),
   mockDB = require('../lib/mockDB');
 
 describe('check_db', function () {
