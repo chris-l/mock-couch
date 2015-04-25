@@ -15,24 +15,25 @@ module.exports = function (grunt) {
         }
       }
     },
-    jasmine_node : {
+    jasmine_nodejs : {
       options : {
-        extensions: 'js',
-        specNameMatcher: 'spec'
+        specNameSuffix : 'spec.js'
       },
-      all     : [
-        "test/"
-      ]
+      all     : {
+        specs : [
+          "test/*.spec.js"
+        ]
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-jslint');
-  grunt.loadNpmTasks('grunt-jasmine-node');
+  grunt.loadNpmTasks('grunt-jasmine-nodejs');
 
   // Default task(s).
   grunt.registerTask('default', [
     'jslint',
-    'jasmine_node'
+    'jasmine_nodejs'
   ]);
 
 };
