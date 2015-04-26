@@ -64,5 +64,11 @@ describe('put_db', function () {
     put_db({ params : { db : 'new_db'} }, res, dummy_function);
     expect(mock_mock.changes.new_db.length).toBe(0);
   });
+  it('should allow to create a database with special characters', function () {
+    put_db({ params: { db: 'abc_$()+-/' } }, res, dummy_function);
+    expect(!!mock_mock.databases['abc_$()+-/']).toBe(true);
+    expect(result.hasOwnProperty('ok')).toBe(true);
+    expect(result.hasOwnProperty('error')).toBe(false);
+  });
 });
 
