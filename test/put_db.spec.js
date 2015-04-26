@@ -59,5 +59,10 @@ describe('put_db', function () {
     expect(result.hasOwnProperty('ok')).toBe(false);
     expect(result.hasOwnProperty('error')).toBe(true);
   });
+
+  it('should add an empty changes list for new databases', function () {
+    put_db({ params : { db : 'new_db'} }, res, dummy_function);
+    expect(mock_mock.changes.new_db.length).toBe(0);
+  });
 });
 
