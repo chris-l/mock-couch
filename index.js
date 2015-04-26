@@ -72,6 +72,9 @@ function MockCouch(options) {
     server.get('/_all_dbs', all_dbs);
     server.head('/_all_dbs', all_dbs);
 
+    // PUT a database
+    server.put('/:db', require('./lib/put_db')(self));
+
     // Check if the database exists.
     server.use(require('./lib/check_db')(self));
 
@@ -109,9 +112,6 @@ function MockCouch(options) {
     put_doc = require('./lib/save_doc')(self);
     server.put('/:db/:doc', put_doc);
     server.post('/:db/', put_doc);
-
-    // PUT a database
-    server.put('/:db', require('./lib/put_db')(self));
 
     // DELETE a document
     server.del('/:db/:doc', require('./lib/delete_doc')(self));
