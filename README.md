@@ -19,6 +19,11 @@ npm install --save-dev mock-couch
 
 ## Changelog
 
+* 0.1.3
+ - Several fixes (Thanks to @monowerker and @alexjeffburke)
+ - Rewriting a lot of the code using [Ramda](http://ramdajs.com/) (to make it more functional)
+ - Support for [linked documents](http://wiki.apache.org/couchdb/Introduction_to_CouchDB_views#Linked_documents) in views (Credits to @monowerker)
+ - Implementation of [`_changes`](https://wiki.apache.org/couchdb/HTTP_database_API#Changes) (Credits to @conor-mac-aoidh)
 * 0.1.2
  - Added HEAD requests. (Credits to @davidwood)
  - Added option to prevent keep-alive connections. (Credits to @davidwood)
