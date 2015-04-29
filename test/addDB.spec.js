@@ -29,5 +29,10 @@ describe('addDB', function () {
     expect(!!mock_mock.databases.people).toBe(true);
     expect(Object.keys(mock_mock.databases.people).length).toBe(2);
   });
+
+  it('should have rows as an optional parameter to just create an empty database', function () {
+    addDB.call(mock_mock, 'empty');
+    expect(!!mock_mock.databases.empty).toBe(true);
+  });
 });
 
