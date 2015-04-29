@@ -52,6 +52,11 @@ describe('views', function () {
                   return a + b.id;
                 }, '');
               }
+            },
+            nullValueView: {
+              map: function (doc) {
+                emit(doc._id, null);
+              }
             }
           },
           _rev : '88888'
@@ -108,5 +113,10 @@ describe('views', function () {
     get({ route : { method : 'GET' }, params : { db : 'people', doc : 'designer', name : 'someview' }, query : { group : 'true', key : '["qball"]' } }, res, dummy_function);
     expect(result.rows.length).toBe(1);
     expect(result.rows[0].key[0]).toBe('qball');
+  });
+
+  it('should be able to handle emitting null values when including docs', function () {
+    get({ route : { method : 'GET' }, params : { db : 'people', doc : 'designer', name : 'nullValueView' }, query : { include_docs : 'true' } }, res, dummy_function);
+    expect(result.rows.length).toBe(4);
   });
 });
