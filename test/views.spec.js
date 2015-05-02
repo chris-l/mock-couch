@@ -22,23 +22,35 @@ describe('views', function () {
     var db = {
       people : mockDB({
         miko : {
+          type: 'player',
           _rev : '1-39117a69a5e6572d5935fab3239d309d',
           name : 'reimu',
-          lastname : 'hakurei'
+          lastname : 'hakurei',
+          trainer: 'qball',
+          friends: ['player2', 'qball']
         },
         magician : {
+          type: 'player',
           _rev : '67890',
           name : 'marisa',
-          lastname : 'kirisame'
+          lastname : 'kirisame',
+          trainer: 'qball',
+          friends: ['miko']
         },
         player2 : {
+          type: 'player',
           _rev : '334455',
           name : 'sanae',
-          lastname : 'kochiya'
+          lastname : 'kochiya',
+          trainer: 'miko',
+          friends: ['miko', 'qball']
         },
         qball : {
+          type: 'player',
           _rev : '9999',
-          name : 'cirno'
+          name : 'cirno',
+          trainer: 'magician',
+          friends : []
         },
         '_design/designer' : {
           views : {
@@ -57,6 +69,13 @@ describe('views', function () {
               map: function (doc) {
                 emit(doc._id, null);
               }
+            },
+            compoundKeyView: {
+              map: function (doc) {
+                if (doc.type === 'player') {
+                  emit([doc.trainer, doc.friends.length], null);
+                }
+              }
             }
           },
           _rev : '88888'
@@ -73,7 +92,6 @@ describe('views', function () {
   });
   /*jslint unparam: false*/
 
-
   it('should execute the reduce function by default, with no grouping', function () {
     get({ route : { method : 'GET' }, params : { db : 'people', doc : 'designer', name : 'someview' }, query : { } }, res, dummy_function);
     expect(result.rows.length).toBe(1);
@@ -89,11 +107,13 @@ describe('views', function () {
     expect(result.rows[2].value).toBe('miko');
     expect(result.rows[4].key.length).toBe(1);
   });
+
   it('should be able to use descending', function () {
     get({ route : { method : 'GET' }, params : { db : 'people', doc : 'designer', name : 'someview' }, query : { group : 'true', descending : 'true' } }, res, dummy_function);
     expect(result.rows[0].key[0]).toBe('qball');
     expect(result.rows[1].key[0]).toBe('player2');
   });
+
   it('should be able to execute only the map, by disabling reduce', function () {
     get({ route : { method : 'GET' }, params : { db : 'people', doc : 'designer', name : 'someview' }, query : { reduce : 'false' } }, res, dummy_function);
     expect(result.total_rows).toBe(8);
@@ -103,11 +123,13 @@ describe('views', function () {
     expect(result.rows[1].key).toBe(null);
     expect(result.rows[7].id).toBe('qball');
   });
+
   it('should be able to get only one specific key, by disabling reduce', function () {
     get({ route : { method : 'GET' }, params : { db : 'people', doc : 'designer', name : 'someview' }, query : { reduce : 'false', key : '["qball"]' } }, res, dummy_function);
     expect(result.rows.length).toBe(1);
     expect(result.rows[0].key[0]).toBe('qball');
   });
+
   it('should be able to get only one specific key, by using reduce with group', function () {
     get({ route : { method : 'GET' }, params : { db : 'people', doc : 'designer', name : 'someview' }, query : { group : 'true', key : '["qball"]' } }, res, dummy_function);
     expect(result.rows.length).toBe(1);
@@ -118,4 +140,40 @@ describe('views', function () {
     get({ route : { method : 'GET' }, params : { db : 'people', doc : 'designer', name : 'nullValueView' }, query : { include_docs : 'true' } }, res, dummy_function);
     expect(result.rows.length).toBe(4);
   });
+
+  it('should emit keys ordered after a startkey', function () {
+    get({ route : { method : 'GET' }, params : { db : 'people', doc : 'designer', name : 'compoundKeyView' }, query : { startkey : '["qball", 2]' } }, res, dummy_function);
+    expect(result.rows.length).toBe(1);
+    expect(result.rows[0].id).toBe('miko');
+    expect(result.rows[0].key[0]).toBe('qball');
+    expect(result.rows[0].key[1]).toBe(2);
+  });
+
+  it('should emit keys ordered BEFORE a startkey with descending order', function () {
+    get({ route : { method : 'GET' }, params : { db : 'people', doc : 'designer', name : 'compoundKeyView' }, query : { startkey : '["qball", 0]', descending : 'true' } }, res, dummy_function);
+    expect(result.rows.length).toBe(2);
+    expect(result.rows[0].id).toBe('player2');
+    expect(result.rows[1].key[0]).toBe('magician');
+    expect(result.rows[1].key[1]).toBe(0);
+  });
+
+  it('should emit keys ordered AFTER an endkey with descending order', function () {
+    get({ route : { method : 'GET' }, params : { db : 'people', doc : 'designer', name : 'compoundKeyView' }, query : { endkey : '["qball", 0]', descending : 'true' } }, res, dummy_function);
+    expect(result.rows.length).toBe(2);
+    expect(result.rows[0].id).toBe('miko');
+    expect(result.rows[1].key[0]).toBe('qball');
+    expect(result.rows[1].key[1]).toBe(1);
+  });
+
+  it('should emit keys in an start-end key interval', function () {
+    get({ route : { method : 'GET' }, params : { db : 'people', doc : 'designer', name : 'compoundKeyView' }, query : { startkey: '["qball", 0]', endkey: '["qball", 1]' } }, res, dummy_function);
+    expect(result.rows.length).toBe(1);
+    expect(result.rows[0].id).toBe('magician');
+  });
+
+  it('should NOT emit any keys in an start-end key interval with descending order', function () {
+    get({ route : { method : 'GET' }, params : { db : 'people', doc : 'designer', name : 'nullValueView' }, query : { startkey: '["magician", 0]', endkey: '["qball", 2]', descending: true } }, res, dummy_function);
+    expect(result.rows.length).toBe(0);
+  });
+
 });
