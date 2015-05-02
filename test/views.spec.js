@@ -102,7 +102,6 @@ describe('views', function () {
     expect(result.rows[1].id).toBe('miko');
     expect(result.rows[1].key).toBe(null);
     expect(result.rows[7].id).toBe('qball');
-    //console.log(JSON.stringify(result, null, ' '));
   });
   it('should be able to get only one specific key, by disabling reduce', function () {
     get({ route : { method : 'GET' }, params : { db : 'people', doc : 'designer', name : 'someview' }, query : { reduce : 'false', key : '["qball"]' } }, res, dummy_function);
