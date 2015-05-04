@@ -62,7 +62,7 @@ function MockCouch(options) {
   this.sequence = {};
 
   (function (server, self) {
-    var all_dbs, all_docs, get_db, get_changes, get_view, get_doc, put_doc;
+    var all_dbs, all_docs, get_db, get_changes, get_view, get_doc, put_doc, get_uuids;
     /**
      * Add the routes
      */
@@ -71,6 +71,10 @@ function MockCouch(options) {
     all_dbs = require('./lib/all_dbs')(self);
     server.get('/_all_dbs', all_dbs);
     server.head('/_all_dbs', all_dbs);
+
+    // GET _uuids
+    get_uuids = require('./lib/uuids')(self);
+    server.get('/_uuids', get_uuids);
 
     // PUT a database
     server.put('/:db', require('./lib/put_db')(self));
