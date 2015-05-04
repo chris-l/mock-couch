@@ -56,6 +56,7 @@ Visit the [Mock Couch website](http://chris-l.github.io/mock-couch/).
     - also, using `_all_docs` with POST to specify the desired keys
  - GET the information of a database
  - GET `_all_dbs`
+ - GET `_uuids`
  - GET views (like `http://localhost:5984/database/_design/myviews/_view/someview/`)
  - PUT one document
  - PUT a database
