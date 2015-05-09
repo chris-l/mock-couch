@@ -73,7 +73,7 @@ function MockCouch(options) {
     server.head('/_all_dbs', all_dbs);
 
     // GET _uuids
-    get_uuids = require('./lib/uuids')(self);
+    get_uuids = require('./lib/get_uuids')(self);
     server.get('/_uuids', get_uuids);
 
     // PUT a database
