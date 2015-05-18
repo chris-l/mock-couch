@@ -8,53 +8,12 @@ var restify = require('restify'),
 
 
 
-function MockCouch(options) {
-  var server;
-
+function MockCouch(server, options) {
   events.EventEmitter.call(this);
+
   if (!options) {
     options = {};
   }
-  /** The var 'server' contains the restify server */
-  server = (function () {
-    /*jslint unparam:true*/
-    var srv = restify.createServer({
-      formatters : {
-        'application/json' : function (req, res, body) {
-          res.setHeader('srv', 'CouchDB/1.0.1 (Erlang OTP/R13B)');
-          res.setHeader('Cache-Control', 'must-revalidate');
-
-          // Check if the client *explicitly* accepts application/json. If not, send text/plain
-          var sendPlainText = (req.header('Accept') !== undefined && req.header('Accept').split(/, */).indexOf('application/json') === -1);
-          if (sendPlainText) {
-            res.setHeader('Content-Type', 'text/plain; charset=utf-8');
-          }
-
-          return JSON.stringify(body, function (key, val) {
-            if (typeof val === 'function') {
-              return val.toString();
-            }
-            return val;
-          });
-        }
-      }
-    });
-    /*jslint unparam:false*/
-    srv.use(restify.bodyParser({ mapParams: false }));
-    srv.pre(restify.pre.sanitizePath());
-    srv.use(restify.queryParser());
-
-    if (options.keepAlive === false) {
-      /*jslint unparam:true*/
-      srv.pre(function preventKeepAlive(req, res, next) {
-        res.setHeader('Connection', 'close');
-        next();
-      });
-      /*jslint unparam:false*/
-    }
-
-    return srv;
-  }());
 
   // This is where the mock databases dwell
   this.databases = {};
@@ -126,21 +85,66 @@ function MockCouch(options) {
 
   this.addDB = require('./lib/addDB');
   this.addDoc = require('./lib/addDoc');
-
-  this.listen = function () {
-    var args = [].slice.call(arguments, 0);
-    args[0] = args[0] || 5984;
-    return server.listen.apply(server, args);
-  };
-  this.close = function () {
-    return server.close.apply(server, arguments);
-  };
 }
 util.inherits(MockCouch, events.EventEmitter);
 
 module.exports = {
+  MockCouch: MockCouch,
   createServer : function (options) {
+    /** The var 'server' contains the restify server */
+    var mockCouch, server = (function () {
+      /*jslint unparam:true*/
+      var srv = restify.createServer({
+        formatters : {
+          'application/json' : function (req, res, body) {
+            res.setHeader('srv', 'CouchDB/1.0.1 (Erlang OTP/R13B)');
+            res.setHeader('Cache-Control', 'must-revalidate');
+
+            // Check if the client *explicitly* accepts application/json. If not, send text/plain
+            var sendPlainText = (req.header('Accept') !== undefined && req.header('Accept').split(/, */).indexOf('application/json') === -1);
+            if (sendPlainText) {
+              res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+            }
+
+            return JSON.stringify(body, function (key, val) {
+              if (typeof val === 'function') {
+                return val.toString();
+              }
+              return val;
+            });
+          }
+        }
+      });
+      /*jslint unparam:false*/
+      srv.use(restify.bodyParser({ mapParams: false }));
+      srv.pre(restify.pre.sanitizePath());
+      srv.use(restify.queryParser());
+
+      if (options && options.keepAlive === false) {
+        /*jslint unparam:true*/
+        srv.pre(function preventKeepAlive(req, res, next) {
+          res.setHeader('Connection', 'close');
+          next();
+        });
+        /*jslint unparam:false*/
+      }
+
+      return srv;
+    }());
+
     /** Returns a brand new mock couch! */
-    return new MockCouch(options);
+    mockCouch = new MockCouch(server, options);
+
+    mockCouch.listen = function () {
+      var args = [].slice.call(arguments, 0);
+      args[0] = args[0] || 5984;
+      return server.listen.apply(server, args);
+    };
+
+    mockCouch.close = function () {
+      return server.close.apply(server, arguments);
+    };
+
+    return mockCouch;
   }
 };
