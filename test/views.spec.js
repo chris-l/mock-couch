@@ -27,6 +27,7 @@ describe('views', function () {
           name : 'reimu',
           lastname : 'hakurei',
           trainer: 'qball',
+          money: 20,
           friends: ['player2', 'qball']
         },
         magician : {
@@ -35,6 +36,7 @@ describe('views', function () {
           name : 'marisa',
           lastname : 'kirisame',
           trainer: 'qball',
+          money: 30,
           friends: ['miko']
         },
         player2 : {
@@ -43,6 +45,7 @@ describe('views', function () {
           name : 'sanae',
           lastname : 'kochiya',
           trainer: 'miko',
+          money: 40,
           friends: ['miko', 'qball']
         },
         qball : {
@@ -50,6 +53,7 @@ describe('views', function () {
           _rev : '9999',
           name : 'cirno',
           trainer: 'magician',
+          money: 50,
           friends : []
         },
         '_design/designer' : {
@@ -69,6 +73,18 @@ describe('views', function () {
               map: function (doc) {
                 emit(doc._id, null);
               }
+            },
+            countmoney : {
+              map : function (doc) {
+                emit(null, doc.money);
+              },
+              reduce : '_sum'
+            },
+            howMany : {
+              map : function (doc) {
+                emit(null, doc._id);
+              },
+              reduce : '_count'
             },
             compoundKeyView: {
               map: function (doc) {
@@ -97,6 +113,16 @@ describe('views', function () {
     expect(result.rows.length).toBe(1);
     expect(result.rows[0].key).toBe(null);
     expect(result.rows[0].value).toBe('qballqballplayer2player2mikomikomagicianmagician');
+  });
+
+  it('should allow to use _sum as the reduce function', function () {
+    get({ route : { method : 'GET' }, params : { db : 'people', doc : 'designer', name : 'countmoney' }, query : { } }, res, dummy_function);
+    expect(result.rows[0].value).toBe(140);
+  });
+
+  it('should allow to use _count as the reduce function', function () {
+    get({ route : { method : 'GET' }, params : { db : 'people', doc : 'designer', name : 'howMany' }, query : { } }, res, dummy_function);
+    expect(result.rows[0].value).toBe(4);
   });
 
   it('should be able to use grouping', function () {
