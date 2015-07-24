@@ -19,6 +19,12 @@ npm install --save-dev mock-couch
 
 ## Changelog
 
+* 0.1.4
+ - The required minimal version of node is now 0.12
+ - Support for the built-in `_sum` and `_count` reduce functions.
+ - Now, mock-couch uses **the Views Collation rules** of CouchDB, by using [couch-viewkey-compare](https://github.com/monowerker/couch-viewkey-compare). (Thanks to @monowerker for this module).
+ - GET `_uuids` (Credits to @watchforstock)
+ - Several fixes (Credits to @monowerkerds and @reederz)
 * 0.1.3
  - Several fixes (Thanks to @monowerker and @alexjeffburke)
  - Rewriting a lot of the code using [Ramda](http://ramdajs.com/) (to make it more functional)
@@ -68,7 +74,7 @@ Visit the [Mock Couch website](http://chris-l.github.io/mock-couch/).
 ## Not yet implemented
 
 * deleting by setting the `_deleted` member
-* `_changes`
+* Attachment support
 * And a lot of other things!
 
 Keep in mind that Mock Couch is not attempting to fully implement CouchDB, but only the features necessary for unit testing CouchDB based apps.
@@ -131,7 +137,7 @@ var couchdb = mockCouch.createServer({ keepAlive: false });
 
 ## Status
 
-Is still in its alpha stage, so its possible that it changes a lot.
+In this moment I think it could be considered beta; I don't expect any breaking changes.
 
 ## License
 
