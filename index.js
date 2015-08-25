@@ -21,7 +21,7 @@ function MockCouch(server, options) {
   this.sequence = {};
 
   (function (server, self) {
-    var all_dbs, all_docs, get_db, get_changes, get_view, get_doc, put_doc, get_uuids;
+    var all_dbs, all_docs, get_db, get_changes, get_view, get_doc, put_doc, get_uuids, get_show;
     /**
      * Add the routes
      */
@@ -81,6 +81,11 @@ function MockCouch(server, options) {
 
     // DELETE a database
     server.del('/:db', require('./lib/delete_db')(self));
+
+    // GET a show function output
+    get_show = require('./lib/get_show')(self);
+    server.get('/:db/_design/:designdoc/_show/:name/:doc', get_show);
+    server.get('/:db/_design/:designdoc/_show/:name', get_show);
   }(server, this));
 
   this.addDB = require('./lib/addDB');
