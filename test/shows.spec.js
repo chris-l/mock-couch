@@ -34,7 +34,7 @@ describe('shows', function () {
         '_design/designer': {
           shows: {
             docName: 'function(doc, req){\nreturn doc.name;\n}',
-            general: 'function(doc, req){\nreturn \"It\'s works!\";\n}',
+            general: 'function(doc, req){\nreturn \"It works!\";\n}',
             headers: 'function(doc, req){\nreturn{\nheaders:{\n\'X-My-Own-Header\':\'you can set your own headers\'\n},\nbody: \'SimpleText\'\n};}',
             nullDoc: 'function(doc, req){\nreturn doc.name;\n}'
           }
@@ -51,10 +51,10 @@ describe('shows', function () {
     get = show_fn(mock_mock);
   });
 
-  it('should return the text, It\'s works!', function () {
+  it('should return the text, It works!', function () {
     get({params: {db: 'people', designdoc: 'designer', name: 'general'}}, res, dummy_function);
     expect(statusCode).toBe(200);
-    expect(result).toBe('It\'s works!');
+    expect(result).toBe('It works!');
   });
 
   it('should set X-My-Own-Header to header and return SimpleText', function () {
