@@ -33,10 +33,10 @@ describe('shows', function () {
         },
         '_design/designer': {
           shows: {
-            docName: 'function(doc, req){\nreturn doc.name;\n}',
-            general: 'function(doc, req){\nreturn \"It works!\";\n}',
-            headers: 'function(doc, req){\nreturn{\nheaders:{\n\'X-My-Own-Header\':\'you can set your own headers\'\n},\nbody: \'SimpleText\'\n};}',
-            nullDoc: 'function(doc, req){\nreturn doc.name;\n}'
+            docName: function (doc) { return doc.name; },
+            general: function () { return "It works!"; },
+            headers: function () { return { headers : { 'X-My-Own-Header': 'you can set your own headers' }, body: 'SimpleText'}; },
+            nullDoc: function (doc) { return doc.name; }
           }
         }
       })
