@@ -44,10 +44,10 @@ describe('get_changes', function () {
     save_doc({ route : { method : 'POST' }, params : { db : 'people', doc : 'player2' }, body : { name : 'sanae', lastname : 'kochiya' } }, res, dummy_function);
     expect(!!mock_mock.databases.people.player2).toBe(true);
     expect(mock_mock.databases.people.player2.name).toBe('sanae');
-    expect(mock_mock.sequence.people).toEqual(2);
+    expect(mock_mock.sequence.people).toEqual(3);
     var change = mock_mock.changes.people.pop();
     expect(change.id).toEqual('player2');
-    expect(change.seq).toEqual(1);
+    expect(change.seq).toEqual(2);
     expect(change.doc._id).toEqual('player2');
     mock_mock.changes.people.push(change);
   });
@@ -56,11 +56,12 @@ describe('get_changes', function () {
     save_doc({ route : { method : 'POST' }, params : { db : 'people', doc : '_local/test' }, body : { test_local : 'value' } }, res, dummy_function);
     // no changes should be added
     expect(mock_mock.changes.people.length).toEqual(1);
-    expect(mock_mock.sequence.people).toEqual(1);
+    expect(mock_mock.sequence.people).toEqual(2);
   });
 
   it('should get the changes since revision 0', function (done) {
     res.write = function (str) {
+      expect(str[str.length - 1]).toEqual('\n');
       var chunk = JSON.parse(str);
       expect(chunk.id).toEqual('miko');
       expect(chunk.seq).toEqual(0);
