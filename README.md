@@ -19,6 +19,11 @@ npm install --save-dev mock-couch
 
 ## Changelog
 
+* 0.1.6
+ - Fix on `instance_start_time` (Credits to @Dainis)
+ - Fix issue when calling `addDB` multiple times. (Credits to @Troy Cochran)
+* 0.1.5
+ - Add support for a show function (Credits to @tekdel)
 * 0.1.4
  - The required minimal version of node is now 0.12
  - Support for the built-in `_sum` and `_count` reduce functions.
