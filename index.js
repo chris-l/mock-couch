@@ -77,8 +77,8 @@ function MockCouch(server, options) {
     server.post('/:db/', put_doc);
 
     // PUT and POST a certain document or _design document
-    server.put('/:db/_design/:doc', put_doc);
-    server.post('/:db/_design/:doc', put_doc);
+    server.put('/:db/_design/:designdoc', put_doc);
+    server.post('/:db/_design/:designdoc', put_doc);
 
     // DELETE a document
     server.del('/:db/:doc', require('./lib/delete_doc')(self));
