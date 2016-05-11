@@ -62,7 +62,6 @@ function MockCouch(server, options) {
     // GET and POST a certain view
     get_view = require('./lib/get_view')(self);
     server.get('/:db/_design/:doc/_view/:name', get_view);
-    server.put('/:db/_design/:doc/_view/:name', get_view);
     server.post('/:db/_design/:doc/_view/:name', get_view);
 
     // GET and HEAD a certain document or _design document
@@ -76,6 +75,10 @@ function MockCouch(server, options) {
     put_doc = require('./lib/save_doc')(self);
     server.put('/:db/:doc', put_doc);
     server.post('/:db/', put_doc);
+
+    // PUT and POST a certain document or _design document
+    server.put('/:db/_design/:doc', put_doc);
+    server.post('/:db/_design/:doc', put_doc);
 
     // DELETE a document
     server.del('/:db/:doc', require('./lib/delete_doc')(self));
