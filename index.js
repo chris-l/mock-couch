@@ -62,6 +62,7 @@ function MockCouch(server, options) {
     // GET and POST a certain view
     get_view = require('./lib/get_view')(self);
     server.get('/:db/_design/:doc/_view/:name', get_view);
+    server.put('/:db/_design/:doc/_view/:name', get_view);
     server.post('/:db/_design/:doc/_view/:name', get_view);
 
     // GET and HEAD a certain document or _design document
