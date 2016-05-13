@@ -2,10 +2,11 @@
 /*global describe, it, expect, beforeEach, afterEach, emit */
 'use strict';
 var view_fn = require('../lib/get_view'),
+  save_doc_fn = require('../lib/save_doc'),
   mockDB  = require('../lib/mockDB');
 
 describe('views', function () {
-  var mock_mock, get, result, dummy_function, res;
+  var mock_mock, get, result, dummy_function, res, save_doc;
 
   dummy_function = function () {
     return;
@@ -105,6 +106,7 @@ describe('views', function () {
       sequence : { people : 5 }
     };
     get = view_fn(mock_mock);
+    save_doc = save_doc_fn(mock_mock);
   });
   /*jslint unparam: false*/
 
@@ -202,4 +204,9 @@ describe('views', function () {
     expect(result.rows.length).toBe(0);
   });
 
+  it('could be added by uploading a design document using http POST', function () {
+    save_doc({ route : { method : 'POST' }, params : { db : 'people', designdoc : 'test' }, query : {}, body : { views : { all : { map : "function(doc) { if (doc.money > 30) { emit(doc._id, doc.money); } }" } } } }, res, dummy_function);
+    get({ route : { method : 'GET' }, query : {}, params : { db : 'people', doc : 'test', name : 'all' }  }, res, dummy_function);
+    expect(result.rows.length).toBe(2);
+  });
 });
