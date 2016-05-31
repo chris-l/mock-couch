@@ -49,6 +49,14 @@ describe('save_doc', function () {
     expect(mock_mock.databases.people.miko.name).toBe('reimu');
   });
 
+  it('should allow to update a document and NOT preserve properties of the old document', function () {
+    save_doc({ route : { method : 'POST' }, params : { db : 'people', doc : 'miko' }, body : { _rev : '12345', name : 'sanae' } }, res, dummy_function);
+    expect(mock_mock.databases.people.miko.name).toBe('sanae');
+    expect(mock_mock.databases.people.miko.lastname).toBeUndefined();
+    expect(mock_mock.databases.people.miko._rev).toBeDefined();
+    expect(mock_mock.databases.people.miko._rev).not.toBe('12345');
+  });
+
   it('should allow to update a document, requiring to pass the current _rev', function () {
     save_doc({ route : { method : 'POST' }, params : { db : 'people', doc : 'miko' }, body : { _rev : '12345', name : 'sanae', lastname : 'kochiya' } }, res, dummy_function);
     expect(mock_mock.databases.people.miko.name).toBe('sanae');
