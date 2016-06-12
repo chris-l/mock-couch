@@ -1,4 +1,4 @@
-<!DOCTYPE html><html class="no-js"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>mockcouch</title><meta name="description" content="a-nodejs-module-designed-to-mock-a-couchdb-database-mostly-for-unit-testing-purposes"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="shortcut icon" href="favicon.png"><link rel="stylesheet" href="css/styles.css"></head><body><header role="banner" class="navbar navbar-inverse navbar-fixed-top"><div class="container"><div class="navbar-header"><button type="button" data-toggle="collapse" data-target=".navbar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="#home" class="navbar-brand">Mock Couch</a></div><nav role="navigation" class="collapse navbar-collapse"><ul class="nav navbar-nav"><li><a href="https://github.com/chris-l/mock-couch">@Github</a></li></ul></nav></div></header><a name="home"></a><div class="jumbotron"><div class="container"><div class="row"><div class="col-md-7"><h1><img src="img/title.png" alt="The Mock Couch" class="img-responsive"/><p class="lead">Mock a CouchDB server for unit testing CouchDB based apps.</p><p><a href="https://travis-ci.org/chris-l/mock-couch"><img src="https://travis-ci.org/chris-l/mock-couch.png?branch=master"/></a></p><p><iframe src="http://ghbtns.com/github-btn.html?user=chris-l&amp;repo=mock-couch&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="130" height="30"></iframe><iframe src="http://ghbtns.com/github-btn.html?user=chris-l&amp;repo=mock-couch&amp;type=fork&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="130" height="30"></iframe></p></h1></div><div class="col-md-5"><img src="img/mock-couch.svg" alt="A photo of a Mock Couch" title="&quot;It's the thing Mock Couch Soup is made from,&quot; said the Queen." class="img-responsive"/></div></div></div></div><div class="container"><div class="row"><div id="leftCol" class="col-md-3"><ul id="sidebar" class="nav nav-stacked"><li><a href="#about">About</a></li><li><a href="#installation">Installation</a></li><li><a href="#create">Create an Instance</a></li><li><a href="#methods">Methods</a><ul class="nav"><li><a href="#listen">listen</a></li><li><a href="#close">close</a></li><li><a href="#addDB">addDB</a></li><li><a href="#addDoc">addDoc</a></li></ul></li><li><a href="#properties">Properties</a><ul class="nav"><li><a href="#databases">databases</a></li></ul></li><li><a href="#views">Views</a></li><li><a href="#events">Events</a></li><li><a href="#license">License</a></li></ul></div><div class="col-md-9"><h2 id="about">About Mock Couch</h2>
+<!DOCTYPE html><html class="no-js"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>mockcouch</title><meta name="description" content="a-nodejs-module-designed-to-mock-a-couchdb-database-mostly-for-unit-testing-purposes"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="shortcut icon" href="favicon.png"><link rel="stylesheet" href="css/styles.css"></head><body><header role="banner" class="navbar navbar-inverse navbar-fixed-top"><div class="container"><div class="navbar-header"><button type="button" data-toggle="collapse" data-target=".navbar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="#home" class="navbar-brand">Mock Couch</a></div><nav role="navigation" class="collapse navbar-collapse"><ul class="nav navbar-nav"><li><a href="//github.com/chris-l/mock-couch">@Github</a></li></ul></nav></div></header><a name="home"></a><div class="jumbotron"><div class="container"><div class="row"><div class="col-md-7"><h1><img src="img/title.png" alt="The Mock Couch" class="img-responsive"><p class="lead">Mock a CouchDB server for unit testing CouchDB based apps.</p><p><a href="//travis-ci.org/chris-l/mock-couch"><img src="//travis-ci.org/chris-l/mock-couch.png?branch=master"></a></p><p><iframe src="//ghbtns.com/github-btn.html?user=chris-l&amp;repo=mock-couch&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="130" height="30"></iframe><iframe src="//ghbtns.com/github-btn.html?user=chris-l&amp;repo=mock-couch&amp;type=fork&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="130" height="30"></iframe></p></h1></div><div class="col-md-5"><img src="img/mock-couch.svg" alt="A photo of a Mock Couch" title="&quot;It's the thing Mock Couch Soup is made from,&quot; said the Queen." class="img-responsive"></div></div></div></div><div class="container"><div class="row"><div id="leftCol" class="col-md-3"><ul id="sidebar" class="nav nav-stacked"><li><a href="#about">About</a></li><li><a href="#installation">Installation</a></li><li><a href="#create">Create an Instance</a></li><li><a href="#methods">Methods</a><ul class="nav"><li><a href="#listen">listen</a></li><li><a href="#close">close</a></li><li><a href="#addDB">addDB</a></li><li><a href="#addDoc">addDoc</a></li></ul></li><li><a href="#properties">Properties</a><ul class="nav"><li><a href="#databases">databases</a></li></ul></li><li><a href="#views">Views</a></li><li><a href="#events">Events</a></li><li><a href="#license">License</a></li></ul></div><div class="col-md-9"><h2 id="about">About Mock Couch</h2>
 
 <p>Mock Couch is an npm module that allows you to create an HTTP server that mocks a CouchDB server by implementing the same RESTful API.</p>
 <p>It was designed mostly for unit testing CouchDB based apps.</p>
@@ -12,11 +12,12 @@
 <h2 id="installation">Installation</h2>
 
 <p>Mock Couch is available as an <a href="https://www.npmjs.org/package/mock-couch">npm module</a>.</p>
-<pre><code>npm install --save-dev mock-couch</code></pre>
-<h2 id="create">Create a Mock Couch Instance</h2>
+<pre><code>npm install --save-dev mock-couch
+</code></pre><h2 id="create">Create a Mock Couch Instance</h2>
 
 <p>To create an instance, it&#39;s necesary to require the module, and then call the <code>createServer()</code> method.</p>
-<pre><code class="language-javascript">var mock = require(&#39;mock-couch&#39;);</code></pre>
+<pre><code class="language-javascript">var mock = require(&#39;mock-couch&#39;);
+</code></pre>
 <p>The returned object is the <strong>mock couch</strong> instance, where the databases and documents should be added.</p>
 <p>Once is that is done, its necessary to start the server by calling the <code>listen()</code> method.</p>
 <h3 id="createServer">createServer
@@ -24,7 +25,8 @@
 </h3>
 
 <p>Returns an object representing the <strong>mock couch</strong> instance.</p>
-<pre><code class="language-javascript">var mockCouch = mock.createServer();</code></pre>
+<pre><code class="language-javascript">var mockCouch = mock.createServer();
+</code></pre>
 <h2 id="methods">Instance Methods</h2>
 
 <p>Each <strong>mock couch</strong> instance has the following methods:</p>
@@ -34,14 +36,16 @@
 
 <p>Start listening HTTP request at the specified port. If no port was specified, it uses <code>5984</code> by default.</p>
 <p>This function calls the <code>listen</code> function from restify with any arguments you pass to it.</p>
-<pre><code class="language-javascript">mockCouch.listen(5984, function() {});</code></pre>
+<pre><code class="language-javascript">mockCouch.listen(5984, function() {});
+</code></pre>
 <h3 id="close">close
   <code>mockCouch.close()</code>
 </h3>
 
 <p>Closes the HTTP server.</p>
 <p>This function calls the <code>close</code> function from restify.</p>
-<pre><code class="language-javascript">mockCouch.close();</code></pre>
+<pre><code class="language-javascript">mockCouch.close();
+</code></pre>
 <h3 id="addDB">addDB
   <code>mockCouch.addDB(database name, [docs])</code>
 </h3>
@@ -52,7 +56,8 @@
   { _id : &#39;first&#39;, value : 1 },
   { _id : &#39;second&#39;, value : 2 }
 ]);
-peopleDb.first.value === 1; // true</code></pre>
+peopleDb.first.value === 1; // true
+</code></pre>
 <h3 id="addDoc">addDoc
   <code>mockCouch.addDoc(database name, doc)</code>
 </h3>
@@ -61,7 +66,8 @@ peopleDb.first.value === 1; // true</code></pre>
 <p>The first argument is the name of the database (required). The second argument is an object containing the database (required).</p>
 <p>If the document includes a <code>_id</code> or <code>_rev</code> properties, it will use them. Otherwise, it will create random ones for it.</p>
 <pre><code class="language-javascript">var result = mockCouch.addDoc(&#39;people&#39;, { _id : &#39;third&#39;, value : 3 });
-result.id === &#39;third&#39;; // true</code></pre>
+result.id === &#39;third&#39;; // true
+</code></pre>
 <h2 id="properties">Instance Properties</h2>
 
 <p>Each <strong>mock couch</strong> instance has the following properties:</p>
@@ -70,8 +76,7 @@ result.id === &#39;third&#39;; // true</code></pre>
 </h3>
 
 <p>Each <strong>mock couch</strong> instance has a <code>databases</code> public property which is an object and, just like its name indicates, contains the databases of that instance.</p>
-<h4>Properties</h4>
-<p>Each database is an object, where each property is a document of the database.</p>
+<h4>Properties</h4><p>Each database is an object, where each property is a document of the database.</p>
 <p>The database object has the following properties with information about the database:</p>
 <ul>
 <li><code>__doc_count</code> : Return the number of documents in the database.</li>
@@ -96,47 +101,41 @@ result.id === &#39;third&#39;; // true</code></pre>
       }
     }
   }
-});</code></pre>
+});
+</code></pre>
 <p>Then you can try the view from <code>http://localhost:5984/mydatabase/_design/myviews/_view/someview/</code></p>
 <h2 id="events">Events</h2>
 
 <p>Each HTTP request emit an event when is responded.</p>
 <p><strong>The name of the emitted event is the HTTP method of the request</strong> (that is, the name can be GET, POST, PUT or DELETE), and the passed argument is an object that have details about the processed request.</p>
 <p>The properties of the object passed to each event are the following:</p>
-<h3>GET _all_dbs</h3>
-<ul>
+<h3>GET _all_dbs</h3><ul>
 <li><code>type</code> <em>String</em> The value <code>_all_dbs</code>.</li>
 <li><code>databases</code> <em>Array</em> A list with the names of the databases.</li>
 </ul>
-<h3>GET / POST _all_docs</h3>
-<ul>
+<h3>GET / POST _all_docs</h3><ul>
 <li><code>type</code> <em>String</em> The value <code>_all_docs</code>.</li>
 <li><code>database</code> <em>String</em> Name of the database.</li>
 <li><code>rows</code> <em>Array</em> A list with the rows from the database.</li>
 </ul>
-<h3>POST _bulk_docs</h3>
-<ul>
+<h3>POST _bulk_docs</h3><ul>
 <li><code>type</code> <em>String</em> The value <code>_bulk_docs</code></li>
 <li><code>docs</code> <em>Array</em> A list with the docs that just been inserted.</li>
 </ul>
-<h3>DELETE database</h3>
-<ul>
+<h3>DELETE database</h3><ul>
 <li><code>type</code> <em>String</em> The value <code>database</code></li>
 <li><code>database</code> <em>String</em> The name of the deleted database</li>
 </ul>
-<h3>DELETE document</h3>
-<ul>
+<h3>DELETE document</h3><ul>
 <li><code>type</code> <em>String</em> The value <code>document</code></li>
 <li><code>id</code> <em>String</em> The id of the deleted document</li>
 </ul>
-<h3>GET document</h3>
-<ul>
+<h3>GET document</h3><ul>
 <li><code>type</code> <em>String</em> The value <code>document</code></li>
 <li><code>id</code> <em>String</em> The id of the requested document</li>
 <li><code>doc</code> <em>Object</em> The requested document</li>
 </ul>
-<h3>GET / POST view</h3>
-<ul>
+<h3>GET / POST view</h3><ul>
 <li><code>type</code> <em>String</em> The value <code>view</code></li>
 <li><code>name</code> <em>String</em> The name of the design document</li>
 <li><code>group</code> <em>Boolean</em> Is grouping being used?</li>
@@ -145,13 +144,11 @@ result.id === &#39;third&#39;; // true</code></pre>
 <li><code>view</code> <em>String</em> The name of the view processed</li>
 <li><code>output</code> The result of view functions (map and optionally, reduce)</li>
 </ul>
-<h3>PUT database</h3>
-<ul>
+<h3>PUT database</h3><ul>
 <li><code>type</code> <em>String</em> The value <code>database</code></li>
 <li><code>database</code> <em>String</em> The name of the database</li>
 </ul>
-<h3>PUT / POST document</h3>
-<ul>
+<h3>PUT / POST document</h3><ul>
 <li><code>type</code> <em>String</em> The value <code>document</code></li>
 <li><code>id</code> <em>String</em> The name of the document</li>
 <li><code>doc</code> <em>Object</em> The document</li>
