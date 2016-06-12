@@ -44,7 +44,7 @@ describe('_bulk_docs', function () {
       changes : { people : [] },
       sequence : { people : 3 }
     };
-    bulkDocs = bulk_docs_fn(mock_mock);
+    bulkDocs = bulk_docs_fn(mock_mock, true);
     people = mock_mock.databases.people;
   });
 

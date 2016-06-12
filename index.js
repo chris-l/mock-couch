@@ -21,7 +21,7 @@ function MockCouch(server, options) {
   this.sequence = {};
 
   (function (server, self) {
-    var all_dbs, all_docs, get_db, get_changes, get_view, get_doc, put_doc, get_uuids, get_show;
+    var all_dbs, all_docs, find, get_db, get_changes, get_view, get_doc, put_doc, get_uuids, get_show;
     /**
      * Add the routes
      */
@@ -47,8 +47,15 @@ function MockCouch(server, options) {
     server.head('/:db/_all_docs', all_docs);
     server.post('/:db/_all_docs', all_docs);
 
+    // POST _find
+    find = require('./lib/find')(self);
+    server.post('/:db/_find', find);
+
+    // POST (insert) a document
+    server.post('/:db', require('./lib/bulk_docs')(self, false));
+
     // POST _bulk_docs
-    server.post('/:db/_bulk_docs', require('./lib/bulk_docs')(self));
+    server.post('/:db/_bulk_docs', require('./lib/bulk_docs')(self, true));
 
     // GET and HEAD the info of certain database
     get_db = require('./lib/get_db')(self);
