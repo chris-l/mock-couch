@@ -19,6 +19,9 @@ npm install --save-dev mock-couch
 
 ## Changelog
 
+* 0.1.7
+ - Fix: Do not preserve preserve any properties of the old document when updating (Credits to @reederz)
+ - New feature: Now is possible to PUT/POST design documents (Credits to @dermidgen)
 * 0.1.6
  - Fix on `instance_start_time` (Credits to @Dainis)
  - Fix issue when calling `addDB` multiple times. (Credits to @Troy Cochran)
