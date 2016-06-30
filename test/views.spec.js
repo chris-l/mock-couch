@@ -93,6 +93,9 @@ describe('views', function () {
                   emit([doc.trainer, doc.friends.length], null);
                 }
               }
+            },
+            stringView : {
+              map: "function(doc) {\nif(doc.type === 'player')\n  emit(doc.name.toLowerCase(), null);\n}"
             }
           },
           _rev : '88888'
@@ -208,5 +211,10 @@ describe('views', function () {
     save_doc({ route : { method : 'POST' }, params : { db : 'people', designdoc : 'test' }, query : {}, body : { views : { all : { map : "function(doc) { if (doc.money > 30) { emit(doc._id, doc.money); } }" } } } }, res, dummy_function);
     get({ route : { method : 'GET' }, query : {}, params : { db : 'people', doc : 'test', name : 'all' }  }, res, dummy_function);
     expect(result.rows.length).toBe(2);
+  });
+
+  it('should emit documents from views inserted as a string', function () {
+    get({ route : { method : 'GET' }, params : { db : 'people', doc : 'designer', name : 'stringView' }, query : {} }, res, dummy_function);
+    expect(result.rows.length).toBe(4);
   });
 });
