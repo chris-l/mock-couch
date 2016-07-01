@@ -20,6 +20,22 @@ function MockCouch(server, options) {
   this.changes = {};
   this.sequence = {};
 
+  // Default error handler. Personalize according to your needs.
+  /*jslint unparam:true*/
+  server.on('uncaughtException', function (req, res, route, err) {
+    console.log('******* Begin Error *******');
+    console.log(route);
+    console.log('*******');
+    console.log(err.stack);
+    console.log('******* End Error *******');
+    if (!res.headersSent) {
+      return res.send(500, { ok : false });
+    }
+    res.write("\n");
+    res.end();
+  });
+  /*jslint unparam:false*/
+
   (function (server, self) {
     var all_dbs, all_docs, get_db, get_changes, get_view, get_doc, put_doc, get_uuids, get_show;
     /**
