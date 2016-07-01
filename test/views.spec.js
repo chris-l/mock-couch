@@ -3,10 +3,11 @@
 'use strict';
 var view_fn = require('../lib/get_view'),
   save_doc_fn = require('../lib/save_doc'),
+  bulk_docs_fn = require('../lib/bulk_docs'),
   mockDB  = require('../lib/mockDB');
 
 describe('views', function () {
-  var mock_mock, get, result, dummy_function, res, save_doc;
+  var mock_mock, get, result, dummy_function, res, save_doc, bulk_docs;
 
   dummy_function = function () {
     return;
@@ -107,6 +108,7 @@ describe('views', function () {
     };
     get = view_fn(mock_mock);
     save_doc = save_doc_fn(mock_mock);
+    bulk_docs = bulk_docs_fn(mock_mock);
   });
   /*jslint unparam: false*/
 
@@ -206,6 +208,11 @@ describe('views', function () {
 
   it('could be added by uploading a design document using http POST', function () {
     save_doc({ route : { method : 'POST' }, params : { db : 'people', designdoc : 'test' }, query : {}, body : { views : { all : { map : "function(doc) { if (doc.money > 30) { emit(doc._id, doc.money); } }" } } } }, res, dummy_function);
+    get({ route : { method : 'GET' }, query : {}, params : { db : 'people', doc : 'test', name : 'all' }  }, res, dummy_function);
+    expect(result.rows.length).toBe(2);
+  });
+  it('could be added by uploading a design document using the bulk method', function () {
+    bulk_docs({ route : { method : 'POST' }, params : { db : 'people' }, query : {}, body : { docs : [ { _id : '_design/test', views : { all : { map : "function(doc) { if (doc.money > 30) { emit(doc._id, doc.money); } }" } } } ] } }, res, dummy_function);
     get({ route : { method : 'GET' }, query : {}, params : { db : 'people', doc : 'test', name : 'all' }  }, res, dummy_function);
     expect(result.rows.length).toBe(2);
   });
