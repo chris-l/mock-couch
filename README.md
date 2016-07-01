@@ -19,6 +19,9 @@ npm install --save-dev mock-couch
 
 ## Changelog
 
+* 0.1.8
+ - Fix: `_all_docs` must return `{ key : thekey, error : "not_found" }` for each missing key
+ - Fix: `_bulk_docs` didn't converted the functions of the passed design docs.
 * 0.1.7
  - Fix: Do not preserve preserve any properties of the old document when updating (Credits to @reederz)
  - New feature: Now is possible to PUT/POST design documents (Credits to @dermidgen)
