@@ -57,6 +57,11 @@ function MockCouch(server, options) {
     // Check if the database exists.
     server.use(require('./lib/check_db')(self));
 
+    // GET and HEAD the info of certain database
+    get_db = require('./lib/get_db')(self);
+    server.get('/:db', get_db);
+    server.head('/:db', get_db);
+
     // GET, HEAD, and POST _all_docs
     all_docs = require('./lib/all_docs')(self);
     server.get('/:db/_all_docs', all_docs);
@@ -65,11 +70,6 @@ function MockCouch(server, options) {
 
     // POST _bulk_docs
     server.post('/:db/_bulk_docs', require('./lib/bulk_docs')(self));
-
-    // GET and HEAD the info of certain database
-    get_db = require('./lib/get_db')(self);
-    server.get('/:db/', get_db);
-    server.head('/:db/', get_db);
 
     // GET _changes feed
     get_changes = require('./lib/get_changes')(self);
