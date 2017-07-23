@@ -1,6 +1,6 @@
 {
   "name": "mock-couch",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "An http server pretending to be couchdb, for unit testing.",
   "homepage": "http://chris-l.github.io/mock-couch/",
   "main": "index.js",
@@ -22,14 +22,14 @@
     "url": "git@github.com:chris-l/mock-couch.git"
   },
   "dependencies": {
-    "ramda": "^0.8.0",
-    "restify": "^2.7.0",
-    "underscore": "^1.6.0",
-    "couch-viewkey-compare": "^1.0.0"
+    "ramda": "0.8.0",
+    "restify": "2.8.5",
+    "underscore": "1.8.3",
+    "couch-viewkey-compare": "1.0.1"
   },
   "devDependencies": {
-    "grunt": "^0.4.4",
-    "grunt-jslint": "^1.1.12",
-    "grunt-jasmine-nodejs": "^1.3.0"
+    "grunt": "0.4.4",
+    "grunt-jslint": "1.1.12",
+    "grunt-jasmine-nodejs": "1.3.0"
   }
 }
