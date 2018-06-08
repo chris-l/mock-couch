@@ -19,6 +19,8 @@ npm install --save-dev mock-couch
 
 ## Changelog
 
+* 0.1.9
+ - Specify the version of dependencies with npm-shrinkwrap.json
 * 0.1.8
  - Fix: `_all_docs` must return `{ key : thekey, error : "not_found" }` for each missing key
  - Fix: `_bulk_docs` didn't converted the functions of the passed design docs.
