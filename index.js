@@ -141,9 +141,9 @@ module.exports = {
         }
       });
       /*jslint unparam:false*/
-      srv.use(restify.bodyParser({ mapParams: false }));
-      srv.pre(restify.pre.sanitizePath());
-      srv.use(restify.queryParser());
+      srv.use(restify.plugins.acceptParser(srv.acceptable));
+      srv.use(restify.plugins.queryParser());
+      srv.use(restify.plugins.bodyParser());
 
       if (options && options.keepAlive === false) {
         /*jslint unparam:true*/
