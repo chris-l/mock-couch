@@ -19,6 +19,8 @@ npm install --save-dev mock-couch
 
 ## Changelog
 
+* 0.1.10
+ - Updated restify version (credits to @gamegee)
 * 0.1.9
  - Specify the version of dependencies with npm-shrinkwrap.json
 * 0.1.8
