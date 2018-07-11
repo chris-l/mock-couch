@@ -4,7 +4,10 @@
   "description": "An http server pretending to be couchdb, for unit testing.",
   "homepage": "http://chris-l.github.io/mock-couch/",
   "main": "index.js",
-  "engine": "node >= 5.9",
+  "engines": {
+      "node": ">=5.9",
+      "npm": ">=3.7"
+  },
   "scripts": {
     "test": "grunt"
   },
