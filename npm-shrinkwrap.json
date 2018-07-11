@@ -382,12 +382,12 @@
       }
     },
     "grunt-jslint": {
-      "version": "1.1.12",
-      "resolved": "https://registry.npmjs.org/grunt-jslint/-/grunt-jslint-1.1.12.tgz",
-      "integrity": "sha1-2tAQXDvsS7sF4R3Ylzhu0rptnS0=",
+      "version": "1.1.15",
+      "resolved": "https://registry.npmjs.org/grunt-jslint/-/grunt-jslint-1.1.15.tgz",
+      "integrity": "sha512-8r75ufVi049gYXl6WRTEoswEOnDTMGZH7vVIeSdmY6ODDCAOeYflB6QtRwhbiUYBEiqVfLFN5hzj8ZNBMnFrMw==",
       "dev": true,
       "requires": {
-        "jslint": "0.12.0"
+        "jslint": "0.10.3"
       }
     },
     "grunt-legacy-util": {
@@ -598,9 +598,9 @@
       "optional": true
     },
     "jslint": {
-      "version": "0.12.0",
-      "resolved": "https://registry.npmjs.org/jslint/-/jslint-0.12.0.tgz",
-      "integrity": "sha512-RoCsyICcKA+6TFsbys9DpKTfPVaC71Mm5QSjvrWA0lDVN+LIvx6apa42FFisMqmCTvJ8DxkcoQGJ0j7m3kTVow==",
+      "version": "0.10.3",
+      "resolved": "https://registry.npmjs.org/jslint/-/jslint-0.10.3.tgz",
+      "integrity": "sha1-iQ2j55ky7fBsX0tSp7W6ZDaGdDY=",
       "dev": true,
       "requires": {
         "exit": "0.1.2",

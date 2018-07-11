@@ -12,6 +12,9 @@ module.exports = function (grunt) {
           node   : true,
           nomen  : true,
           regexp : true
+        },
+        options : {
+          edition: 'es5'
         }
       }
     },
