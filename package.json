@@ -5,8 +5,8 @@
   "homepage": "http://chris-l.github.io/mock-couch/",
   "main": "index.js",
   "engines": {
-      "node": ">=5.9",
-      "npm": ">=3.7"
+    "node": ">=5.9",
+    "npm": ">=3.7"
   },
   "scripts": {
     "test": "grunt"
@@ -25,10 +25,10 @@
     "url": "git@github.com:chris-l/mock-couch.git"
   },
   "dependencies": {
+    "couch-viewkey-compare": "1.0.1",
     "ramda": "0.8.0",
-    "restify": "^6.3.4",
-    "underscore": "1.8.3",
-    "couch-viewkey-compare": "1.0.1"
+    "restify": "^8.1.0",
+    "underscore": "1.8.3"
   },
   "devDependencies": {
     "grunt": "0.4.4",
