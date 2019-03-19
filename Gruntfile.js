@@ -17,16 +17,6 @@ module.exports = function (grunt) {
           edition: 'es5'
         }
       }
-    },
-    jasmine_nodejs : {
-      options : {
-        specNameSuffix : 'spec.js'
-      },
-      all     : {
-        specs : [
-          "test/*.spec.js"
-        ]
-      }
     }
   });
 
@@ -35,8 +25,7 @@ module.exports = function (grunt) {
 
   // Default task(s).
   grunt.registerTask('default', [
-    'jslint',
-    'jasmine_nodejs'
+    'jslint'
   ]);
 
 };
