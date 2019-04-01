@@ -5,8 +5,8 @@
   "homepage": "http://chris-l.github.io/mock-couch/",
   "main": "index.js",
   "engines": {
-      "node": ">=5.9",
-      "npm": ">=3.7"
+    "node": ">=5.9",
+    "npm": ">=3.7"
   },
   "scripts": {
     "test": "grunt"
