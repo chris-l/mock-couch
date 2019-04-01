@@ -112,6 +112,21 @@ describe('_all_docs', function () {
     expect(result.rows[2].id).toBe('miko');
   });
 
+  it('should skip or limit entries if skip and/or limit is used', function () {
+    get({ route : { method : 'GET' }, params : { db : 'people' }, query : { limit : 1 } }, res, dummy_function);
+    expect(result.rows[0].id).toBe('magician');
+    expect(result.rows.length).toBe(1);
+
+    get({ route : { method : 'GET' }, params : { db : 'people' }, query : { skip : 1 } }, res, dummy_function);
+    expect(result.rows[0].id).toBe('miko');
+    expect(result.offset).toBe(1);
+
+    get({ route : { method : 'GET' }, params : { db : 'people' }, query : { skip : 1, limit : 2 } }, res, dummy_function);
+    expect(result.rows[0].id).toBe('miko');
+    expect(result.rows[1].id).toBe('player2');
+  });
+
+
   it('must allow to specify which documents I want by passing the keys using POST', function () {
     get({ route : { method : 'POST' }, params : { db : 'people' }, query : { }, body : { keys : [ 'miko', 'qball' ] } }, res, dummy_function);
     expect(result.rows.length).toBe(2);
