@@ -51,6 +51,9 @@ function MockCouch(server, options) {
     get_uuids = require('./lib/get_uuids')(self);
     server.get('/_uuids', get_uuids);
 
+    // POST _session
+    server.post('/_session', require('./lib/session')(self));
+
     // PUT a database
     server.put('/:db', require('./lib/put_db')(self));
 
