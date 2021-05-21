@@ -36,23 +36,22 @@ describe('get_uuids', function () {
   });
 
   it('should get a single uuid', function () {
-    get({ params : {} }, res, dummy_function);
+    get({ query : {} }, res, dummy_function);
     expect(result.uuids.length).toBe(1);
-    expect(result.uuids[0]).toEqual("4e17c12963f4bee0e6ec90da54000000");
     expect(statusCode).toBe(200);
   });
 
   it('should get multiple uuids', function () {
-    get({ params : {"count": 3} }, res, dummy_function);
+    get({ query : {"count": 3} }, res, dummy_function);
     expect(result.uuids.length).toBe(3);
-    expect(result.uuids[0]).toEqual("4e17c12963f4bee0e6ec90da54000000");
-    expect(result.uuids[1]).toEqual("4e17c12963f4bee0e6ec90da54000001");
-    expect(result.uuids[2]).toEqual("4e17c12963f4bee0e6ec90da54000002");
+    expect(result.uuids[0].slice(-6)).toEqual("000000");
+    expect(result.uuids[1].slice(-6)).toEqual("000001");
+    expect(result.uuids[2].slice(-6)).toEqual("000002");
     expect(statusCode).toBe(200);
   });
 
   it('should allow a custom prefix', function () {
-    custom_get({ params : {} }, res, dummy_function);
+    custom_get({ query : {} }, res, dummy_function);
     expect(result.uuids.length).toBe(1);
     expect(result.uuids[0]).toEqual("4e17c12963f4bee0e6ec90da55000000");
     expect(statusCode).toBe(200);
