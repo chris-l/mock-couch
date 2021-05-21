@@ -80,6 +80,9 @@ function MockCouch(server, options) {
     server.get('/:db/_design/:doc/_view/:name', get_view);
     server.post('/:db/_design/:doc/_view/:name', get_view);
 
+    // GET from a certain partition view
+    server.get('/:db/_partition/:partition/_design/:doc/_view/:name', get_view);
+
     // GET and HEAD a certain document or _design document
     get_doc = require('./lib/get_doc')(self);
     server.get('/:db/_design/:designdoc/', get_doc);
